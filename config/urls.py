@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from .swagger import schema_view
 
@@ -27,6 +28,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Api
+
+    # Token
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pari'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
     # Docs
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
