@@ -29,6 +29,7 @@ urlpatterns = [
 
     # Api
     path('api/v1/user/', include('user.urls')),
+    path('api/v1/quiz/', include('quiz.urls')),
 
     # Token
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pari'),

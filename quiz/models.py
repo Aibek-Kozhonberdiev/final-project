@@ -22,3 +22,23 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class Question(models.Model):
+    CHOICES = (
+        ('A', 'Choice A'),
+        ('B', 'Choice B'),
+        ('C', 'Choice C'),
+        ('D', 'Choice D'),
+    )
+
+    img = models.ImageField(upload_to='question_img/', null=True, blank=True)
+    text = models.CharField(max_length=300)
+    choice_a = models.CharField(max_length=50)
+    choice_b = models.CharField(max_length=50)
+    choice_c = models.CharField(max_length=50, null=True, blank=True)
+    choice_d = models.CharField(max_length=50, null=True, blank=True)
+    correct_choice = models.CharField(max_length=1, choices=CHOICES)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.quiz.title
