@@ -7,7 +7,6 @@ class Profile(models.Model):
     description = models.TextField(max_length=300, null=True, blank=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
     avatar = models.ImageField(upload_to='avatar/', null=True, blank=True)
-    background = models.ImageField(upload_to='background/', null=True, blank=True)
     point = models.IntegerField(
         default=0,
         validators=[

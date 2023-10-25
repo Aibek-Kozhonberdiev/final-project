@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # App
     "user.apps.UserConfig",
+    'quiz.apps.QuizConfig',
 ]
 
 MIDDLEWARE = [

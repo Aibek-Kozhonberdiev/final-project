@@ -8,7 +8,6 @@ from .models import Profile
 
 class ProfileSerializer(serializers.ModelSerializer):
     avatar = serializers.ImageField(required=False, allow_null=True)
-    background = serializers.ImageField(required=False, allow_null=True)
 
     class Meta:
         model = Profile
@@ -27,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'profile')
+        fields = ('id', 'username', 'password', 'password2', 'email', 'first_name', 'last_name', 'profile')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
