@@ -16,6 +16,9 @@ class Quiz(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name_plural = 'Quizes'
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
@@ -38,7 +41,13 @@ class Question(models.Model):
     choice_c = models.CharField(max_length=50, null=True, blank=True)
     choice_d = models.CharField(max_length=50, null=True, blank=True)
     correct_choice = models.CharField(max_length=1, choices=CHOICES)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    time = models.IntegerField(default=20)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='question_set')
 
     def __str__(self):
         return self.quiz.title
+
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    quizzes = models.ForeignKey(Quiz, related_name='group_quiz', on_delete=models.CASCADE)
+    members = models.ManyToManyField(User, related_name='group_user')
