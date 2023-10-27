@@ -1,38 +1,132 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+:root {
+
+  /*========== Colors ==========*/
+  --main-text-color:#fff;
+  --desc-text-color: rgba(255, 255, 255, 0.50);
+  --body-color: linear-gradient(113deg, #984D38 -30.3%, #181E41 58.12%);
+  --btn-color: linear-gradient(214deg, #B75CFF 6.04%, #671AE4 92.95%);
+  --btn-color-gray: rgba(255, 255, 255, 0.10);
+
+  /*========== Font and typography ==========*/
+  --body-font: "Michroma", sans-serif;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-bold: 700;
+
+  /*========== Font sizes ==========*/
+  --h1-font-size: 50px;
+  --h2-font-size: 40px;
+  --h3-font-size: 30px;
+  --normal-font-size: 20px;
+  --small-font-size: 15px;
+}
+
+@media screen and (max-width: 992px) {
+  :root {
+    --h1-font-size: 45px;
+    --h2-font-size: 35px;
+    --h3-font-size: 25px;
+    --normal-font-size: 17px;
+    --small-font-size: 15px;
+  }
+}
+@media screen and (max-width: 768px) {
+  :root {
+    --h1-font-size: 40px;
+    --h2-font-size: 30px;
+    --h3-font-size: 20px;
+    --normal-font-size: 16px;
+    --small-font-size: 15px;
+  }
+}
+@media screen and (max-width: 600px) {
+  :root {
+    --h1-font-size: 35px;
+    --h2-font-size: 30px;
+    --h3-font-size: 20px;
+    --normal-font-size: 16px;
+    --small-font-size: 15px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body,
+button,
+input {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  font-style: normal;
+}
+body {
+  background: var(--body-color) no-repeat;
+  color: var(--main-text-color);
+}
+h1,
+h2,
+h3 {
+  font-weight: var(--font-bold);
+}
+h1 {
+  font-size: var(--h1-font-size);
+}
+h2 {
+  font-size: var(--h2-font-size);
+}
+h3 {
+  font-size: var(--h3-font-size);
+}
+
+select {
+  background: var(--btn-color-gray);
+  color: var(--body-font);
+  border-radius: 10px;
+  padding: 5px;
+}
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: var(--btn-color);
+  padding: 10px 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+li {
+  list-style: none;
+}
+
+.section__title {
+  color: var(--main-text-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-bold);
+}
+.section__subtitle {
+  font-size: var(--normal-font-size);
+  margin: 10px auto 30px;
+  color: var(--desc-text-color);
+  max-width: 423px;
+}
+.section__title,
+.section__subtitle {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 0 15px;
 }

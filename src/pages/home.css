@@ -1,0 +1,98 @@
+
+.main {
+    margin: 150px 0 150px;
+  }
+  .main__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .main__desc {
+    max-width: 41%;
+  }
+  .main__buttons {
+    display: flex;
+    margin-bottom: 40px;
+    gap: 20px;
+  }
+  .main__benefits {
+    display: flex;
+    justify-content: space-around;
+  }
+  .main__benefit {
+    text-align: center;
+  }
+  .main__benefit-desc {
+    color: var(--desc-text-color)
+  }
+  .main__title {
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-bold);
+    line-height: 60px;
+  }
+  .main__subtitle {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-medium);
+    color: var(--desc-text-color);
+    margin-bottom: 40px;
+    line-height: 36px;
+  }
+  .main__btn-gray {
+    background: var(--btn-color-gray)
+  }
+  
+  .main__images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 517px;
+    width: 49%;
+    gap: 15px;
+  }
+  
+  .main__image {
+    width: 100%;
+    border-radius:10px;
+    overflow: hidden;
+  }
+  .main__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  
+  }
+  .main__images-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .main__images-center {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .main__images-right {
+    height: 100%;
+    display: flex;
+    align-items:center
+  }
+  .main__image-skull {
+    height: 27%;
+  }
+  .main__image-figures {
+    height: 43%;
+  }
+  .main__image-camera {
+    height: 25%;
+  }
+  .main__image-light {
+    height: 21%;
+  }
+  .main__image-middle {
+    height: 43%;
+  }
+  .main__image-woman {
+    height: 31%;
+  }
+  .main__image-man {
+    height: 81%;
+  }

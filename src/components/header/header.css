@@ -1,0 +1,27 @@
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+  .header__logo {
+    font-size: 25px;
+    font-weight: var(--font-bold);
+    color: #ffd12f
+  }
+  .header__logo-violet {
+    background: var(--btn-color, linear-gradient(214deg, var(--btn-color)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header__nav {
+    width: 44%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header__nav-mobile {
+    display: none;
+  }
