@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({className, onClick}) => {
+const Input = ({className, onClick,placeholder, type}) => {
   return (
     <div className={className}>
       <svg
@@ -23,9 +23,8 @@ const Input = ({className, onClick}) => {
         </defs>
       </svg>
       <input
-        className=''
-        type='text'
-        placeholder='Название'
+        type={type}
+        placeholder={placeholder}
       />
     </div>
   );

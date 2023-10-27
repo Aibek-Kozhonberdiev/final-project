@@ -133,4 +133,43 @@ li {
   margin: 0 auto;
   padding: 0 15px;
 }
+.login {
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+}
+.login__container {
+width: 100%;
+}
+.login__wrapper{
+  width: 100%;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items:center;
+}
+.login__input{
+  width: 50%;
+  background-color: var(--btn-color-gray);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+}
+
+.login__input input {
+background-color: transparent;
+width: 60%;
+border:none;
+margin-left: 10px;
+}
+.login__btn {
+  margin-top: 50px;
+}
+.login__link {
+  text-decoration: underline;
+}

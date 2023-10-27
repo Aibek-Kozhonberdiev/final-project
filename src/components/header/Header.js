@@ -22,8 +22,12 @@ const Header = () => {
           </NavLink>
 
 
-          <NavLink to='/cart' className='header__link'>
+          <NavLink to='/lobby' className='header__link'>
             <Button text={'Играть'} className={'header__btn'}/>
+          </NavLink>
+
+          <NavLink to='/login' className='header__link'>
+            <Button text={'login'} className={'header__btn'}/>
           </NavLink>
         </nav>
 
