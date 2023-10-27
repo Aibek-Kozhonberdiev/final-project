@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'djongo',
 
     # App
     "user.apps.UserConfig",
@@ -95,8 +96,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': os.getenv('NAME'),  # name database MongoDp from .enf
+        'HOST': os.getenv('HOST'),  # default host localhost
+        'PORT': os.getenv('PORT'),  # default port 27017
     }
 }
 

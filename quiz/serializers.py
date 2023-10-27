@@ -1,7 +1,6 @@
 from datetime import datetime
 from rest_framework import serializers
 
-from user.serializers import UserSerializer
 from .models import Category, Quiz, Question, Group
 
 class CategorySerializer(serializers.ModelSerializer):
