@@ -1,0 +1,27 @@
+.quizzes_filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.quizzes__btns {
+    display: flex;
+    gap: 30px;
+}
+.quizzes__input{
+    width: 31%;
+    background-color: var(--btn-color-gray);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.quizzes__input input {
+background-color: transparent;
+width: 100%;
+border:none;
+margin-left: 10px;
+}
+.quizzes__select {
+    width: 20%;
+}

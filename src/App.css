@@ -108,6 +108,9 @@ a {
 li {
   list-style: none;
 }
+.section {
+  margin: 150px 0 150px;
+}
 
 .section__title {
   color: var(--main-text-color);
@@ -130,3 +133,4 @@ li {
   margin: 0 auto;
   padding: 0 15px;
 }
+
