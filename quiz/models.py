@@ -40,7 +40,7 @@ class Question(models.Model):
     choice_b = models.CharField(max_length=50)
     choice_c = models.CharField(max_length=50, null=True, blank=True)
     choice_d = models.CharField(max_length=50, null=True, blank=True)
-    correct_choice = models.CharField(max_length=1, choices=CHOICES)
+    correct_choice = models.IntegerField(choices=CHOICES)
     time = models.IntegerField(default=20)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='question_set')
 
@@ -48,7 +48,15 @@ class Question(models.Model):
         return self.quiz.title
 
 class Room(models.Model):
+    STATUS = (
+        ('pendeng', 'pendeng'),
+        ('in progress', 'in progress'),
+        ('complete', 'complete'),
+    )
+
     name = models.CharField(max_length=100)
+    status = models.CharField(max_length=150, choices=STATUS)
+    question = models.IntegerField(default=0)
     quizzes = models.ForeignKey(Quiz, related_name='group_quiz', on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name='rooms')
 

@@ -16,5 +16,3 @@ class ViewSetUser(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     pagination_class = UserResultsSetPagination
-
-

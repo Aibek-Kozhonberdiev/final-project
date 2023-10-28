@@ -4,8 +4,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from quiz.models import Room
-
 
 class Profile(models.Model):
     description = models.TextField(max_length=300, null=True, blank=True)
@@ -19,6 +17,10 @@ class Profile(models.Model):
         ]
     )
     number_of_completed_games = models.IntegerField(default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=User)
