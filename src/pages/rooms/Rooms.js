@@ -1,8 +1,8 @@
 import React from 'react';
-import Input from '../components/Input';
+import Input from '../../components/Input';
 import './rooms.css';
-import Button from '../components/Button.js';
-import Room from '../components/Room';
+import Button from '../../components/Button.js';
+import Room from '../../components/room/Room';
 
 const Rooms = () => {
   return (
@@ -20,7 +20,7 @@ const Rooms = () => {
         </div>
 
         <div className='rooms__list'>
-            <Room />
+          <Room />
         </div>
       </div>
     </section>

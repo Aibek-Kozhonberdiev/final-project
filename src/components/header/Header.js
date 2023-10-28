@@ -27,7 +27,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink to='/login' className='header__link'>
-            <Button text={'login'} className={'header__btn'}/>
+            <Button text={'Войти'} className={'header__btn'}/>
           </NavLink>
         </nav>
 

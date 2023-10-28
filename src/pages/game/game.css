@@ -1,0 +1,27 @@
+.game {
+    height: calc(100vh - 70px);
+}
+.game__wrapper {
+    padding: 70px 0;
+    text-align: center;
+}
+.game__question {
+    text-align: center;
+}
+.game__answers {
+    display: grid;
+    grid-template: 1fr 1fr/ 1fr 1fr;
+    align-items: center;
+}
+.game__answer {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.answer__checkbox {
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}

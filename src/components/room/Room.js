@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './Button.js';
-import './room.css'
+import Button from '../Button.js';
+import './room.css';
 
 const Room = () => {
   return (
@@ -12,11 +12,7 @@ const Room = () => {
         <p className='rooms__name'>Название комнаты</p>
         <p className='rooms__gamers'>Кол-во участников</p>
       </div>
-      <Button
-        text={'Присоединиться'}
-        className={'collection__btn'}
-        
-      />
+      <Button text={'Присоединиться'} className={'collection__btn'} />
     </div>
   );
 };
