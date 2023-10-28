@@ -1,7 +1,7 @@
 from django.utils import timezone
 from rest_framework import serializers
 
-from .models import Category, Quiz, Question, Group
+from .models import Category, Quiz, Question, Room
 
 class CategorySerializer(serializers.ModelSerializer):
 
@@ -29,5 +29,5 @@ class QuizSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Group
+        model = Room
         fields = '__all__'

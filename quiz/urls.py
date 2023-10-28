@@ -7,7 +7,7 @@ router = DefaultRouter()
 router.register(r'categories', views.ViewSetCategory)
 router.register(r'questions', views.ViewSetQuestion)
 router.register(r'quizzes', views.ViewSetQuiz)
-router.register(r'groups', views.ViewSetGroup)
+router.register(r'rooms', views.ViewSetRoom)
 
 urlpatterns = [
     path('', include(router.urls)),

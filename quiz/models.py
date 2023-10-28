@@ -28,10 +28,10 @@ class Category(models.Model):
 
 class Question(models.Model):
     CHOICES = (
-        ('A', 'Choice A'),
-        ('B', 'Choice B'),
-        ('C', 'Choice C'),
-        ('D', 'Choice D'),
+        (1, 'Choice A'),
+        (2, 'Choice B'),
+        (3, 'Choice C'),
+        (4, 'Choice D'),
     )
 
     img = models.ImageField(upload_to='question_img/', null=True, blank=True)
@@ -47,7 +47,10 @@ class Question(models.Model):
     def __str__(self):
         return self.quiz.title
 
-class Group(models.Model):
+class Room(models.Model):
     name = models.CharField(max_length=100)
     quizzes = models.ForeignKey(Quiz, related_name='group_quiz', on_delete=models.CASCADE)
-    members = models.ManyToManyField(User, related_name='group_user')
+    members = models.ManyToManyField(User, related_name='rooms')
+
+    def __str__(self):
+        return self.name
