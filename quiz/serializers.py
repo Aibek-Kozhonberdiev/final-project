@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Category, Quiz, Question, Group
@@ -18,7 +18,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class QuizSerializer(serializers.ModelSerializer):
-    update = serializers.DateTimeField(default=datetime.now())
+    update = serializers.DateTimeField(default=timezone.now)
     question_set = QuestionSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True, source='cat')
 

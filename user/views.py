@@ -5,20 +5,19 @@ from rest_framework import viewsets
 
 from .models import Profile
 from .serializers import UserSerializer, ProfileSerializer
+from .paginations import UserResultsSetPagination
 
 
 class ViewSetProfile(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    # permission_classes = ()
-    # pagination_class = ...
+    pagination_class = UserResultsSetPagination
 
 
 class ViewSetUser(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = ()
-    # pagination_class = ...
+    pagination_class = UserResultsSetPagination
 
 
 @receiver(post_save, sender=User)
