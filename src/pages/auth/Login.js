@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { username, password } = formData;
-    console.log(formData)
+
     dispatch(login(username, password));
   };
   const state = useSelector(state => state);

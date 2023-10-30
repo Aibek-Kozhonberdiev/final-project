@@ -11,32 +11,64 @@ import Login from './pages/auth/Login';
 import Signin from './pages/auth/Signin';
 import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
+import Quiz from './components/Quiz';
+import axios from 'axios';
+import refreshTokensThunk from './reducers/tokenRefreshReducer';
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuth) {
-      dispatch(checkToken()); 
-    }
-  }, [isAuth, dispatch]);
+    const verifyToken = async () => {
+      try {
+        const response = await axios('http://aiba23334.pythonanywhere.com/api/token/verify/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            token: localStorage.getItem('accessToken')
+          })
+        });
+  
+        if (response) {
+          console.log('The token still ok!')
+        } else {
+          refreshTokensThunk()
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+      }
+    };
+    
+    verifyToken();
+  }, []);
 
   return (
-    <div className="App">
-      <Router>
+    <div className='App'>
+      {isAuth ? (
+        <Router>
           <Header />
           <Routes>
-            <Route path='/Home' element={<Home />} />
+            <Route path='/' element={<Home />} />
             <Route path='/rooms' element={<Rooms />} />
             <Route path='/quizzes' element={<Quizzes />} />
+            <Route path='/quiz' element={<Quiz />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/lobby' element={<Lobby />} />
             <Route path='/game' element={<Game />} />
           </Routes>
-
         </Router>
+      ) : (
+        <Router>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signin' element={<Signin />} />
+          </Routes>
+        </Router>
+      )}
     </div>
   );
 }

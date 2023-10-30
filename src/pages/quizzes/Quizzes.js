@@ -1,37 +1,41 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import './quizzes.css'
+import './quizzes.css';
 import axios from 'axios';
-
-
+import Quiz from '../../components/Quiz';
 
 const Quizzes = () => {
+  const [quizzes, setQuizzes] = useState([]);
+  const [isOpen, setIsOpen] = useState(false)
 
-  // const [quizzes, setQuizzes] = useState({})
+  const openQuiz = () => {
+    setIsOpen(!isOpen)
+  }
 
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
+  const fetchQuizzes = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/v1/quizzes/';
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
 
-  // const getQuizzes = async () => {
-  //   try {
-  //     const {data} = await axios({
-  //       method: 'get',
-  //       url: 'http://aiba23334.pythonanywhere.com/api/v1/quizzes',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${localStorage.getItem(accessToken)}`
-  //       }
-  //     });
-  
-    
-      
-  //   } catch (error) {
-  //     console.error('Ошибка:', error);
-  //   }
-  // };
+      const response = await axios(apiUrl, { headers });
+      if (response.status === 200) {
+        setQuizzes(response.data.results);
+        console.log(response.data.results);
+      } else {
+        console.error('Ошибка при получении данных:', response.status);
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
 
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
 
   return (
     <section className='quizzes section'>
@@ -57,6 +61,11 @@ const Quizzes = () => {
           <div className='quizzes__btns'>
             <Button text={'Создать'} />
           </div>
+        </div>
+        <div className='quizzes__list'>
+          {quizzes.map((el) => (
+            <Quiz el={el} onClick={openQuiz} isOpen/>
+          ))}
         </div>
       </div>
     </section>

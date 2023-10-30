@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className='header'>
       <div className='container header__wrapper'>
-        <NavLink to='/home' className='header__link header__logo'>
+        <NavLink to='/' className='header__link header__logo'>
           <p className='header__logo'>QUIZ</p>
         </NavLink>
 

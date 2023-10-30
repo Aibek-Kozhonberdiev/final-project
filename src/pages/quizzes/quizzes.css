@@ -25,3 +25,16 @@ margin-left: 10px;
 .quizzes__select {
     width: 20%;
 }
+.quizzes__list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.quizzes__item {
+    background-color: var(--btn-color-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    padding: 30px;
+}

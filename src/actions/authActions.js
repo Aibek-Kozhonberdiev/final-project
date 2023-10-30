@@ -5,9 +5,6 @@ export const setTokens = (accessToken, refreshToken) => ({
     refreshToken,
   });
   
-  export const checkToken = () => ({
-    type: 'CHECK_TOKEN',
-  });
   
   export const refreshTokens = () => ({
     type: 'REFRESH_TOKENS',
@@ -26,12 +23,11 @@ export const login = (username, password) => {
           password: password,
         }),
       });
-      console.log(response.ok)
+      
       if (response.ok) {
         
         const data = await response.json();
         const { access, refresh } = data;
-
 
         localStorage.setItem('isAuth', true);
         localStorage.setItem('accessToken', access);
