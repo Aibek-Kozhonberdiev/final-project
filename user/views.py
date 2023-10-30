@@ -30,6 +30,9 @@ class PointAdd(APIView):
         return profile
 
     def change_point(self, profile, point):
+        """
+        Change the point value of a given Profile object, ensuring it stays within a specific range.
+        """
         new_point = profile.point + point
         if new_point > 1000:
             profile.point = 1000
@@ -40,6 +43,9 @@ class PointAdd(APIView):
         profile.save()
 
     def post(self, request, pk):
+        """
+        Handle a POST request to update a Profile's point value.
+        """
         point = request.data.get('point')
         profile = self.get_object(pk)
 
