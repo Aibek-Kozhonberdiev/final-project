@@ -11,13 +11,13 @@ from .paginations import UserResultsSetPagination
 
 
 class ViewSetProfile(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.all().order_by('-point')
     serializer_class = ProfileSerializer
     pagination_class = UserResultsSetPagination
 
 
 class ViewSetUser(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
     pagination_class = UserResultsSetPagination
 
