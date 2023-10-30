@@ -1,6 +1,10 @@
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save, pre_delete, m2m_changed
+from django.dispatch import receiver
+
+from user.models import Profile
 
 
 class Quiz(models.Model):
@@ -9,7 +13,6 @@ class Quiz(models.Model):
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(default=datetime.now())
     img = models.ImageField(upload_to='quizzes/', null=True, blank=True)
-    number_of_questions = models.IntegerField(default=0)
     question = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, blank=True)
@@ -62,3 +65,32 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(post_save, sender=Question)
+def update_quiz_question_count(sender, instance, **kwargs):
+    """
+    instance - model of the instance that was created
+    Increase the value of the question field in the linked Quiz model
+    """
+    instance.quiz.question += 1
+    instance.quiz.save()
+
+@receiver(pre_delete, sender=Question)
+def delete_quiz_question_count(sender, instance, **kwargs):
+    """
+    Deleting a question decreases the value
+    """
+    instance.quiz.question -= 1
+    instance.quiz.save()
+
+@receiver(m2m_changed, sender=Room.members.through)
+def update_profile_completed_games(sender, instance, action, reverse, model, pk_set, **kwargs):
+    """
+    To increase the user's "number_of_completed_games" when creating a room
+    """
+    if action == "post_add":
+        for pk in pk_set:
+            profile = Profile.objects.get(pk=pk)
+            profile.number_of_completed_games += 1
+            profile.save()
