@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
 
 from .models import Profile
 from .serializers import UserSerializer, ProfileSerializer
@@ -22,6 +23,8 @@ class ViewSetUser(viewsets.ModelViewSet):
 
 
 class PointAdd(APIView):
+    permission_classes = [IsAdminUser]
+
     def get_object(self, pk):
         profile = get_object_or_404(Profile, pk=pk)
         return profile
@@ -33,7 +36,7 @@ class PointAdd(APIView):
         elif new_point < -150:
             profile.point = -150
         else:
-            profile.point += point
+            profile.point = new_point
         profile.save()
 
     def post(self, request, pk):

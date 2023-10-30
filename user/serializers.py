@@ -8,6 +8,8 @@ from .models import Profile
 
 class ProfileSerializer(serializers.ModelSerializer):
     avatar = serializers.ImageField(required=False, allow_null=True)
+    point = serializers.IntegerField(read_only=True)
+    number_of_completed_games = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Profile

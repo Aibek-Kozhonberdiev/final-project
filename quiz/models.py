@@ -10,6 +10,7 @@ class Quiz(models.Model):
     update = models.DateTimeField(default=datetime.now())
     img = models.ImageField(upload_to='quizzes/', null=True, blank=True)
     number_of_questions = models.IntegerField(default=0)
+    question = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, blank=True)
 
@@ -56,7 +57,6 @@ class Room(models.Model):
 
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=150, choices=STATUS)
-    question = models.IntegerField(default=0)
     quizzes = models.ForeignKey(Quiz, related_name='group_quiz', on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name='rooms')
 

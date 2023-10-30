@@ -21,6 +21,7 @@ class QuizSerializer(serializers.ModelSerializer):
     update = serializers.DateTimeField(default=timezone.now)
     question_set = QuestionSerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True, source='cat')
+    question = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Quiz
