@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { checkToken, refreshTokens } from './actions/authActions';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header.js';
@@ -10,6 +13,15 @@ import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
 
 function App() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(checkToken()); 
+    }
+  }, [isAuth, dispatch]);
+
   return (
     <div className="App">
       <Router>

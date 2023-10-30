@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './game.css';
 import Timer from '../../components/Timer.js';
 import Button from '../../components/Button';
@@ -6,6 +6,9 @@ import Notification from '../../components/Notification';
 
 const Game = () => {
   const [isTimeUp, setTimeUp] = useState(false);
+
+
+  
 
   return isTimeUp ? (
     <Notification />

@@ -1,9 +1,15 @@
 import React from 'react';
 import Button from '../../components/Button.js';
 import './home.css';
+import { useSelector } from 'react-redux';
+import Login from '../auth/Login.js';
 
 const Home = () => {
+  const isAuth = useSelector((state) => (state.auth.isAuth));
+console.log(isAuth)
   return (
+    isAuth ? (
+      <div>
     <main className='main'>
       <div className='container main__wrapper'>
         <div className='main__desc'>
@@ -83,6 +89,9 @@ const Home = () => {
         </div>
       </div>
     </main>
+      </div>
+    ) : <Login />
+
   );
 };
 

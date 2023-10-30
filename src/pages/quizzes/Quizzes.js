@@ -1,9 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import './quizzes.css'
+import axios from 'axios';
+
+
 
 const Quizzes = () => {
+
+  // const [quizzes, setQuizzes] = useState({})
+
+  // useEffect(() => {
+  //   getToken();
+  // }, []);
+
+  // const getQuizzes = async () => {
+  //   try {
+  //     const {data} = await axios({
+  //       method: 'get',
+  //       url: 'http://aiba23334.pythonanywhere.com/api/v1/quizzes',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${localStorage.getItem(accessToken)}`
+  //       }
+  //     });
+  
+    
+      
+  //   } catch (error) {
+  //     console.error('Ошибка:', error);
+  //   }
+  // };
+
+
   return (
     <section className='quizzes section'>
       <div className='container'>

@@ -26,9 +26,6 @@ const Header = () => {
             <Button text={'Играть'} className={'header__btn'}/>
           </NavLink>
 
-          <NavLink to='/login' className='header__link'>
-            <Button text={'Войти'} className={'header__btn'}/>
-          </NavLink>
         </nav>
 
 
