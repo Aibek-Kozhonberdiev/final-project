@@ -22,9 +22,6 @@ const Login = () => {
 
     dispatch(login(username, password));
   };
-  const state = useSelector(state => state);
-
-console.log(state);
 
   return (
     <section className='login'>

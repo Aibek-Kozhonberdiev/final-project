@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { checkToken, refreshTokens } from './actions/authActions';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header/Header.js';
@@ -13,35 +12,41 @@ import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
 import Quiz from './components/Quiz';
 import axios from 'axios';
-import refreshTokensThunk from './reducers/tokenRefreshReducer';
+
+import { login } from './actions/authActions';
+import {startRefreshToken} from './reducers/tokenRefreshReducer'
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const verifyToken = async () => {
+      const accessToken = localStorage.getItem('accessToken');
+
       try {
-        const response = await axios('http://aiba23334.pythonanywhere.com/api/token/verify/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await axios.post(
+          'http://aiba23334.pythonanywhere.com/api/token/verify/',
+          {
+            token: accessToken,
           },
-          body: JSON.stringify({
-            token: localStorage.getItem('accessToken')
-          })
-        });
-  
-        if (response) {
-          console.log('The token still ok!')
-        } else {
-          refreshTokensThunk()
-        }
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
       } catch (error) {
-        console.error('Ошибка:', error);
+        console.log(error.response.data.code === 'token_not_valid');
+        if (error.response.data.code === 'token_not_valid') {
+          console.log('токен недействителен');
+          startRefreshToken();
+        }
       }
     };
-    
-    verifyToken();
+    if (isAuth) {
+      verifyToken();
+    }
   }, []);
 
   return (

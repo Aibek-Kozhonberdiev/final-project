@@ -4,11 +4,6 @@ export const setTokens = (accessToken, refreshToken) => ({
     accessToken,
     refreshToken,
   });
-  
-  
-  export const refreshTokens = () => ({
-    type: 'REFRESH_TOKENS',
-  });
 
 export const login = (username, password) => {
   return async (dispatch) => {
@@ -40,3 +35,6 @@ export const login = (username, password) => {
     }
   };
 };
+
+
+

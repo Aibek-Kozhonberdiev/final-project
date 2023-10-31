@@ -4,13 +4,22 @@ import Button from '../../components/Button';
 import './quizzes.css';
 import axios from 'axios';
 import Quiz from '../../components/Quiz';
+import QuizModal from '../../components/QuizModal';
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [isOpen, setIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openQuiz = () => {
     setIsOpen(!isOpen)
+  }
+  const openModal = () => {
+    setModalIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false);
   }
 
   const fetchQuizzes = async () => {
@@ -38,7 +47,7 @@ const Quizzes = () => {
   }, []);
 
   return (
-    <section className='quizzes section'>
+    <section className='quizzes section' id='#quizzes'>
       <div className='container'>
         <h2 className='section__title'>Все квизы </h2>
         <p className='section__subtitle'>Список всех квизов</p>
@@ -59,12 +68,13 @@ const Quizzes = () => {
           </select>
 
           <div className='quizzes__btns'>
-            <Button text={'Создать'} />
+            <Button onClick={openModal} text={'Создать'} />
           </div>
+          <QuizModal modalIsOpen={modalIsOpen} closeModal={closeModal}/>
         </div>
         <div className='quizzes__list'>
-          {quizzes.map((el) => (
-            <Quiz el={el} onClick={openQuiz} isOpen/>
+          {quizzes.map((el, idx) => (
+            <Quiz key={idx} el={el} onClick={openQuiz} isOpen={isOpen}/>
           ))}
         </div>
       </div>

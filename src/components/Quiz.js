@@ -6,12 +6,12 @@ const Quiz = ({ el, isOpen }) => {
     <div className='quizzes__item'>
       <h3 className='quizzes__item-name'>{el.title}</h3>
       <p>{el.content}</p>
-      <p>Категория: {el.category['name']}</p>
+      <p>Категория: {el?.category?.name}</p>
       <p>Кол-во вопросов: {el.number_of_questions}</p>
 
       <div className="quizzes__questions">
-        {el.question_set.map((el) => {
-          <p>{el.text}</p>
+        {el.question_set.map((el, idx) => {
+          <p key={idx}>{el.text}</p>
         })}
       </div>
     </div>
@@ -19,7 +19,7 @@ const Quiz = ({ el, isOpen }) => {
     <div className='quizzes__item'>
       <h3 className='quizzes__item-name'>{el.title}</h3>
       <p>{el.content}</p>
-      <p>Категория: {el.category['name']}</p>
+      <p>Категория: {el?.category?.name}</p>
       <p>Кол-во вопросов: {el.number_of_questions}</p>
     </div>
   );

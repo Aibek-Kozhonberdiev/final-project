@@ -1,31 +1,32 @@
 import axios from 'axios';
 import { refreshTokens, login } from '../actions/authActions';
 
-export const refreshTokensThunk = () => async (dispatch, getState) => {
-  const { refreshToken } = getState().auth;
+export const startRefreshToken = async () => {
+  console.log('refresh is started');
 
+  const refreshToken = localStorage.getItem('refreshToken');
+  console.log(refreshToken);
   try {
-    const response = await axios(
+    const response = await axios.post(
       'http://aiba23334.pythonanywhere.com/api/token/refresh/',
       {
-        method: 'POST',
+        refresh: refreshToken,
+      },
+      {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          refresh: refreshToken,
-        }),
       }
     );
 
-    const { accessToken, refreshToken: newRefreshToken } = response.data;
-
-    dispatch(login(accessToken, newRefreshToken));
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', newRefreshToken);
+    const newAccessToken = response.data.access
+    
+    dispatch(login(newAccessToken));
+    localStorage.setItem('accessToken', newAccessToken);
   } catch (error) {
     console.log(error);
   }
 };
 
-export default refreshTokensThunk;
+
+

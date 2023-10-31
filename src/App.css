@@ -167,6 +167,12 @@ width: 60%;
 border:none;
 margin-left: 10px;
 }
+.login__input textarea {
+  background-color: transparent;
+  width: 60%;
+  border:none;
+  margin-left: 10px;
+  }
 .login__btn {
   margin-top: 50px;
 }

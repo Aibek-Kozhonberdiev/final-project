@@ -38,3 +38,46 @@ margin-left: 10px;
     border-radius: 15px;
     padding: 30px;
 }
+
+.quizzes__modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+    border-radius: 15px;
+    outline: none;
+    padding: 50px;
+    background: var(--body-color);
+}
+.quizzes__title-modal {
+    margin-bottom: 20px;
+}
+.quizzes__modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.quizzes__input-form {
+    width: 100%;
+    background-color: var(--btn-color-gray);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+  }
+.quizzes__input-form input {
+    background-color: transparent;
+    width: 100%;
+    border:none;
+    margin-left: 10px;
+    }
+ .quizzes__input-form textarea {
+      background-color: transparent;
+      width: 100%;
+      border:none;
+      margin-left: 10px;
+      }
