@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { refreshTokens, login } from '../actions/authActions';
+import { useDispatch } from 'react-redux';
 
-export const startRefreshToken = async () => {
+export const startRefreshToken = async (dispatch) => {
+
   console.log('refresh is started');
 
   const refreshToken = localStorage.getItem('refreshToken');
