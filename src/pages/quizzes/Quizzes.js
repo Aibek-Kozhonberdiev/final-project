@@ -6,12 +6,14 @@ import axios from 'axios';
 import Quiz from '../../components/Quiz';
 import QuizModal from '../../components/QuizModal.js';
 
+import { useDispatch } from 'react-redux';
+import { addQuizzes } from '../../actions/quizzesActions.js';
+import { useSelector } from 'react-redux';
 
 
 
 const Quizzes = () => {
 
-  const [quizzes, setQuizzes] = useState([]);
   const [isOpen, setIsOpen] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -25,6 +27,7 @@ const Quizzes = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   }
+  const dispatch = useDispatch();
 
   const fetchQuizzes = async () => {
     try {
@@ -36,7 +39,8 @@ const Quizzes = () => {
 
       const response = await axios(apiUrl, { headers });
       if (response.status === 200) {
-        setQuizzes(response.data.results);
+        dispatch(addQuizzes(response.data.results))
+      
       } else {
         console.error('Ошибка при получении данных:', response.status);
       }
@@ -44,10 +48,12 @@ const Quizzes = () => {
       console.error('Ошибка:', error);
     }
   };
-
+  const quizzes = useSelector((state) => state.quizzes.quizzes);
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [quizzes]);
+
+
 
   return (
     <section className='quizzes section' id='#quizzes'>

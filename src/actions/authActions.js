@@ -29,14 +29,19 @@ export const login = (username, password) => {
 
         const decoded = jwtDecode(access);
         const userId = decoded.user_id
-        console.log(decoded)
 
-        localStorage.setItem('isAuth', true);
-        localStorage.setItem('accessToken', access);
-        localStorage.setItem('refreshToken', refresh);
-        localStorage.setItem('userId', userId);
+        if (username == 'root' && password == 'aibek_admin') {
+          localStorage.setItem('AdminAccessToken', access);
+        } else {
+          localStorage.setItem('isAuth', true);
+          localStorage.setItem('accessToken', access);
+          localStorage.setItem('refreshToken', refresh);
+          localStorage.setItem('userId', userId);
+  
+          dispatch(setTokens(access, refresh, userId));
+        }
 
-        dispatch(setTokens(access, refresh, userId));
+
       }
     } catch (error) {
       console.error('Ошибка:', error);

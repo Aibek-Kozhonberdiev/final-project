@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-// import tokenRefreshReducer from './tokenRefreshReducer';
+import quizzesReducer from '../reducers/quizzesReducers';
+
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // tokenRefresh: tokenRefreshReducer,
+  quizzes: quizzesReducer,
+
 });
 
 export default rootReducer;
+

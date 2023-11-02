@@ -11,12 +11,8 @@ import Signin from './pages/auth/Signin';
 import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
 import axios from 'axios';
-
-
-import { login } from './actions/authActions';
 import {startRefreshToken} from './reducers/tokenRefreshReducer'
 import CreateQuestions from './pages/quizzes/CreateQuestions';
-import QuizModal from './components/QuizModal';
 
 function App() {
   

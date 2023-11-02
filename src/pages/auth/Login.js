@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Input from '../../components/Input';
 import Button from '../..//components/Button';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { login } from '../../actions/authActions.js'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const Login = () => {

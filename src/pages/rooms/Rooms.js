@@ -5,9 +5,14 @@ import Button from '../../components/Button.js';
 import Room from '../../components/room/Room';
 import axios from 'axios';
 
-const Rooms = () => {
-  const [rooms, setRooms] = useState([]);
+import AddRoom from './AddRoom.js';
 
+const Rooms = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [rooms, setRooms] = useState([]);
+   const handleAddRoom =() => {
+    setIsOpen(!isOpen)
+   }
   const fetchRooms = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -19,7 +24,6 @@ const Rooms = () => {
       const response = await axios(apiUrl, { headers });
       if (response.status === 200) {
         setRooms(response.data.results);
-        console.log(response.data.results);
       } else {
         console.error('Ошибка при получении данных:', response.status);
       }
@@ -42,7 +46,7 @@ const Rooms = () => {
           <Input className={'rooms__input'} />
 
           <div className='rooms__btns'>
-            <Button text={'Создать'} />
+            <Button text={'Создать'} onClick={handleAddRoom}/>
           </div>
         </div>
 
@@ -51,6 +55,7 @@ const Rooms = () => {
             <Room room={room} key={idx}/>
           ))}
         </div>
+         <AddRoom isOpen={isOpen} setIsOpen={setIsOpen}/>
       </div>
     </section>
   );
