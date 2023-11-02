@@ -1,67 +1,108 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import axios from 'axios';
+import moment from 'moment';
 
-const QuizModal = ({ modalIsOpen, closeModal }) => {
+const QuizModal = ({ modalIsOpen, closeModal}) => {
   const [quizData, setQuizData] = useState({
-    name: '',
-    category: '',
+    title: '',
+    category: {},
     description: '',
   });
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setQuizData({
-      ...quizData,
-      [name]: value,
-    });
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+    console.log(category);
   };
 
-  const handleCreateQuiz = () => {
-    // Здесь quizData содержит данные, которые нужно отправить на сервер
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
 
-    
+  const getCurrentTimeInDesiredFormat = () => {
+    const now = moment();
+    const formattedTime = now.format('YYYY-MM-DDTHH:mm:ss.SSSSSSZ');
+    return formattedTime;
+  };
+
+  const handleCreateQuiz = async (e) => {
+    e.preventDefault();
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const userId = localStorage.getItem('userId');
+      const dateTime = getCurrentTimeInDesiredFormat();
+      console.log(category);
+      const response = await axios(
+        'http://aiba23334.pythonanywhere.com/api/v1/quizzes/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          data: {
+            update: `${dateTime}`,
+            category: {
+              name: `${category}`,
+            },
+            title: `${title}`,
+            content: `${description}`,
+            user: `${userId}`,
+          },
+        }
+      );
+
+      setQuizData((quizData.quizId = response?.data?.id));
+
+      closeModal();
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
   };
 
   return (
     modalIsOpen && (
-      <Modal 
+      <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className={'quizzes__modal'}        // Укажите стили и другие параметры для модального окна
-      >
-        <div className="container">
-        <h2 className='section__title quizzes__title-modal'>Создание квиза</h2>
-        <form className={'quizzes__modal-form'}>
-          <div className='quizzes__input-form'>
-            <input
-              type='text'
-              name='name'
-              value={quizData.name}
-              onChange={handleInputChange}
-              placeholder='Title'
-            />
-          </div>
-          <div className='quizzes__input-form'>
-            
-            <input
-              type='text'
-              name='category'
-              value={quizData.category}
-              onChange={handleInputChange}
-              placeholder='category'
-            />
-          </div>
-          <div className='quizzes__input-form'>
-            
-            <textarea
-              name='description'
-              value={quizData.description}
-              onChange={handleInputChange}
-              placeholder='Description'
-            />
-          </div>
-          <button onClick={handleCreateQuiz}>Создать вопросы</button>
-        </form>
+        
+        className={'quizzes__modal'}>
+        <div className='container'>
+          <h2 className='section__title quizzes__title-modal'>
+            Создание квиза
+          </h2>
+          <form className={'quizzes__modal-form'}>
+            <div className='quizzes__input-form'>
+              <input
+                type='text'
+                name='title'
+                onChange={handleTitle}
+                placeholder='Title'
+              />
+            </div>
+            <div className='quizzes__input-form'>
+              <input
+                type='text'
+                name='category'
+                onChange={handleCategory}
+                placeholder='category'
+              />
+            </div>
+            <div className='quizzes__input-form'>
+              <textarea
+                name='description'
+                onChange={handleDescription}
+                placeholder='Description'
+              />
+            </div>
+            <button onClick={handleCreateQuiz}>Создать</button>
+
+          </form>
         </div>
       </Modal>
     )

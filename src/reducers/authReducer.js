@@ -2,6 +2,7 @@ const initialState = {
   isAuth: localStorage.getItem('isAuth') || null,
   accessToken: localStorage.getItem('accessToken') || null,
   refreshToken: localStorage.getItem('refreshToken') || null,
+  userID: localStorage.getItem('userId') || null,
 };
 
 const authReducer = (state = initialState, action) => {

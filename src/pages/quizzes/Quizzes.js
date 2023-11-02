@@ -4,9 +4,13 @@ import Button from '../../components/Button';
 import './quizzes.css';
 import axios from 'axios';
 import Quiz from '../../components/Quiz';
-import QuizModal from '../../components/QuizModal';
+import QuizModal from '../../components/QuizModal.js';
+
+
+
 
 const Quizzes = () => {
+
   const [quizzes, setQuizzes] = useState([]);
   const [isOpen, setIsOpen] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -33,7 +37,6 @@ const Quizzes = () => {
       const response = await axios(apiUrl, { headers });
       if (response.status === 200) {
         setQuizzes(response.data.results);
-        console.log(response.data.results);
       } else {
         console.error('Ошибка при получении данных:', response.status);
       }
@@ -74,7 +77,7 @@ const Quizzes = () => {
         </div>
         <div className='quizzes__list'>
           {quizzes.map((el, idx) => (
-            <Quiz key={idx} el={el} onClick={openQuiz} isOpen={isOpen}/>
+            <Quiz key={idx} el={el} onClick={openQuiz} isOpen={isOpen} />
           ))}
         </div>
       </div>

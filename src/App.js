@@ -10,13 +10,16 @@ import Login from './pages/auth/Login';
 import Signin from './pages/auth/Signin';
 import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
-import Quiz from './components/Quiz';
 import axios from 'axios';
+
 
 import { login } from './actions/authActions';
 import {startRefreshToken} from './reducers/tokenRefreshReducer'
+import CreateQuestions from './pages/quizzes/CreateQuestions';
+import QuizModal from './components/QuizModal';
 
 function App() {
+  
   const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
 
@@ -57,12 +60,14 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/rooms' element={<Rooms />} />
-            <Route path='/quizzes' element={<Quizzes />} />
-            <Route path='/quiz' element={<Quiz />} />
+            <Route path='/quizzes' element={<Quizzes/>} />
             <Route path='/login' element={<Login />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/lobby' element={<Lobby />} />
             <Route path='/game' element={<Game />} />
+            <Route path='/create-questions' element={<CreateQuestions />} />
+            
+            
           </Routes>
         </Router>
       ) : (

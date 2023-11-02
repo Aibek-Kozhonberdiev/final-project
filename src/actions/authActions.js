@@ -1,8 +1,11 @@
-export const setTokens = (accessToken, refreshToken) => ({
+import { jwtDecode } from "jwt-decode";
+
+export const setTokens = (accessToken, refreshToken, userId) => ({
     type: 'SET_TOKENS',
     isAuth: true,
     accessToken,
     refreshToken,
+    userId,
   });
 
 export const login = (username, password) => {
@@ -24,11 +27,16 @@ export const login = (username, password) => {
         const data = await response.json();
         const { access, refresh } = data;
 
+        const decoded = jwtDecode(access);
+        const userId = decoded.user_id
+        console.log(decoded)
+
         localStorage.setItem('isAuth', true);
         localStorage.setItem('accessToken', access);
         localStorage.setItem('refreshToken', refresh);
+        localStorage.setItem('userId', userId);
 
-        dispatch(setTokens(access, refresh));
+        dispatch(setTokens(access, refresh, userId));
       }
     } catch (error) {
       console.error('Ошибка:', error);
