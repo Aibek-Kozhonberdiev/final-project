@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
 from .models import Quiz, Category, Question, Room
-from .serializers import CategorySerializer, QuestionSerializer, QuizSerializer, GroupSerializer
+from .serializers import CategorySerializer, QuestionSerializer, QuizSerializer, RoomSerializer
 
 
 class ViewSetCategory(viewsets.ModelViewSet):
@@ -13,9 +13,9 @@ class ViewSetQuestion(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
 
 class ViewSetQuiz(viewsets.ModelViewSet):
-    queryset = Quiz.objects.all()
+    queryset = Quiz.objects.all().order_by('-create', '-update')
     serializer_class = QuizSerializer
 
 class ViewSetRoom(viewsets.ModelViewSet):
-    queryset = Room.objects.all()
-    serializer_class = GroupSerializer
+    queryset = Room.objects.all().order_by('-members')
+    serializer_class = RoomSerializer

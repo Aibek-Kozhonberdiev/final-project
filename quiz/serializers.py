@@ -27,8 +27,43 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quiz
         fields = '__all__'
 
-class GroupSerializer(serializers.ModelSerializer):
+class RoomSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Room
         fields = '__all__'
+
+    def checking_the_user_for_credentials(self, user_set, excluded_room_id=None):
+        for user in user_set:
+            existing_room = Room.objects.filter(members=user).exclude(id=excluded_room_id).first()
+            if existing_room:
+                error = {
+                    "detail": f"The user is already in another room.",
+                    "user_id": int(user.pk)
+                }
+                raise serializers.ValidationError(error)
+
+    def create(self, validated_data):
+        user_set = validated_data['members']
+        self.checking_the_user_for_credentials(user_set)
+
+        room = Room.objects.create(
+            name=validated_data['name'],
+            status=validated_data['status'],
+            quizzes=validated_data['quizzes'],
+        )
+        room.members.set(user_set)
+
+        return room
+
+    def update(self, instance, validated_data):
+        user_set = validated_data['members']
+        excluded_room_id = instance.pk
+        self.checking_the_user_for_credentials(user_set, excluded_room_id)
+
+        instance.name = validated_data.get('name', instance.name)
+        instance.status = validated_data.get('status', instance.status)
+        instance.quizzes = validated_data.get('quizzes', instance.quizzes)
+        instance.members.set(user_set)
+
+        return instance
