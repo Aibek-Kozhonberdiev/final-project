@@ -17,5 +17,5 @@ class ViewSetQuiz(viewsets.ModelViewSet):
     serializer_class = QuizSerializer
 
 class ViewSetRoom(viewsets.ModelViewSet):
-    queryset = Room.objects.all().order_by('-members')
+    queryset = Room.objects.all()
     serializer_class = RoomSerializer

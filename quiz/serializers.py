@@ -34,6 +34,10 @@ class RoomSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def checking_the_user_for_credentials(self, user_set, excluded_room_id=None):
+        """
+        Validates the user's credentials before adding them to the room.
+        Checks to see if users are already in other rooms and throws an error if such a room is found.
+        """
         for user in user_set:
             existing_room = Room.objects.filter(members=user).exclude(id=excluded_room_id).first()
             if existing_room:
@@ -45,7 +49,7 @@ class RoomSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_set = validated_data['members']
-        self.checking_the_user_for_credentials(user_set)
+        self.checking_the_user_for_credentials(user_set)  # check user for rooms
 
         room = Room.objects.create(
             name=validated_data['name'],
@@ -59,7 +63,7 @@ class RoomSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         user_set = validated_data['members']
         excluded_room_id = instance.pk
-        self.checking_the_user_for_credentials(user_set, excluded_room_id)
+        self.checking_the_user_for_credentials(user_set, excluded_room_id)  # check user for rooms
 
         instance.name = validated_data.get('name', instance.name)
         instance.status = validated_data.get('status', instance.status)
