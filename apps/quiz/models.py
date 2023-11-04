@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
 
-from user.models import Profile
+from apps.user.models import Profile
 
 
 class Quiz(models.Model):

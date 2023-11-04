@@ -28,8 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Api
-    path('api/', include('user.urls')),
-    path('api/', include('quiz.urls')),
+    path('api/', include('apps.user.urls')),
+    path('api/', include('apps.quiz.urls')),
 
     # Token
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pari'),

@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')  # From .env file
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
 MY_HOST = os.getenv('MY_HOST')  # From .env file
 
@@ -52,8 +52,9 @@ INSTALLED_APPS = [
     'djongo',
 
     # App
-    "user.apps.UserConfig",
-    'quiz.apps.QuizConfig',
+    'apps.user.apps.UserConfig',
+    'apps.quiz.apps.QuizConfig',
+    'apps.bot.apps.BotConfig',
 ]
 
 MIDDLEWARE = [
@@ -235,3 +236,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_PORT = os.getenv('EMAIL_PORT')
 # EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Telegram bot
+TELEGRAM_KEY = os.getenv('TELEGRAM_KEY')

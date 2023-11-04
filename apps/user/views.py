@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -113,7 +112,7 @@ class ViewsConfirmed(APIView):
         key_confirmation.key = self.key_generation()
         key_confirmation.save()
 
-        return Response({'detail': 'The key was generated successfully'}, status=HTTP_201_CREATED)
+        return Response({'detail': 'The key was generated successfully'}, status.HTTP_201_CREATED)
 
     def post(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
@@ -126,6 +125,6 @@ class ViewsConfirmed(APIView):
             profile.confirmed = True
             profile.save()
 
-            return Response({'detail': 'user successfully verified'}, status=HTTP_201_CREATED)
+            return Response({'detail': 'user successfully verified'}, status.HTTP_201_CREATED)
 
         return Response({'detail': "the key doesn't match"}, status.HTTP_400_BAD_REQUEST)
