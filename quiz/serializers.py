@@ -28,6 +28,7 @@ class QuizSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RoomSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(read_only=True)
 
     class Meta:
         model = Room

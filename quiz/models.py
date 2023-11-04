@@ -1,6 +1,6 @@
+import random
 from datetime import datetime
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
@@ -53,6 +53,7 @@ class Question(models.Model):
         return self.quiz.title
 
 class Room(models.Model):
+    CHARS = '1234567890'
     STATUS = (
         ('pendeng', 'pendeng'),
         ('in progress', 'in progress'),
@@ -63,9 +64,22 @@ class Room(models.Model):
     status = models.CharField(max_length=150, choices=STATUS)
     quizzes = models.ForeignKey(Quiz, related_name='group_quiz', on_delete=models.CASCADE)
     members = models.ManyToManyField(User, related_name='rooms')
+    private = models.BooleanField(default=False)
+    password = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def password_generation(self):
+        password = ''
+        for i in range(10):
+            password += random.choice(self.CHARS)
+        return password
+
+    def save(self, *args, **kwargs):
+        if self.private == True:
+            self.password = self.password_generation()
+        super(Room, self).save(*args, **kwargs)
 
 
 @receiver(post_save, sender=Question)
