@@ -37,6 +37,27 @@ class ViewSetUser(viewsets.ModelViewSet):
         }
         return Response(user_data, status=status.HTTP_201_CREATED)
 
+    def key_check(self, request):
+        key = request.data.get('key')
+        profile_id = request.data.get('profile_id')
+        key_confirmation = get_object_or_404(KeyConfirmation, profile_id=profile_id)
+        # Check if the received 'key' doesn't match the one in KeyConfirmation
+        if key_confirmation.key != key:
+            raise TypeError
+
+    def update(self, request, *args, **kwargs):
+        try:
+            # Call the key_check method to verify the key
+            self.key_check(request)
+        except TypeError:
+            return Response({'detail': "the key doesn't match"}, status.HTTP_400_BAD_REQUEST)
+
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=kwargs.get('partial', False))
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
 
 class PointAdd(APIView):
     permission_classes = [IsAdminUser]
@@ -105,6 +126,6 @@ class ViewsConfirmed(APIView):
             profile.confirmed = True
             profile.save()
 
-            return Response({'detail': 'user successfully verified'})
+            return Response({'detail': 'user successfully verified'}, status=HTTP_201_CREATED)
 
-        return Response({'detail': "the key doesn't match"})
+        return Response({'detail': "the key doesn't match"}, status.HTTP_400_BAD_REQUEST)
