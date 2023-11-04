@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             # checking availability of token telegram
-            bot = telebot.TeleBot(settings.TELEGRAM_KEY)
+            bot = telebot.TeleBot(settings.TELEGRAM_KEY, settings.PROXY_URL)
             print(bot.get_me())
         except Exception:
             print('Bot token is not defined')

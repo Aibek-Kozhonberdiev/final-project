@@ -238,5 +238,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # Telegram bot
+PROXY_URL = os.getenv('PROXY')
 TELEGRAM_KEY = os.getenv('TELEGRAM_KEY')
 ADMIN_TELEGRAM_ID = os.getenv('ADMIN_TELEGRAM_ID')

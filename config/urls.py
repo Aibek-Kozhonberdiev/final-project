@@ -30,6 +30,7 @@ urlpatterns = [
     # Api
     path('api/', include('apps.user.urls')),
     path('api/', include('apps.quiz.urls')),
+    path('api/', include('apps.bot.urls')),
 
     # Token
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pari'),
