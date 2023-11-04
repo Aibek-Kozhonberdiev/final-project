@@ -239,3 +239,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Telegram bot
 TELEGRAM_KEY = os.getenv('TELEGRAM_KEY')
+ADMIN_TELEGRAM_ID = os.getenv('ADMIN_TELEGRAM_ID')
