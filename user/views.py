@@ -1,12 +1,15 @@
+import random
+
 from django.contrib.auth.models import User
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Profile
+from .models import Profile, KeyConfirmation
 from .serializers import UserSerializer, ProfileSerializer
 from .paginations import UserResultsSetPagination
 
@@ -67,3 +70,41 @@ class PointAdd(APIView):
             return Response({'detail': 'The operation was successful'})
         except TypeError:
             return Response({'detail': 'Point value is missing'})
+
+class ViewsConfirmed(APIView):
+    CHARS = '1234567890'
+
+    def key_generation(self):
+        password = ''
+        for i in range(10):
+            password += random.choice(self.CHARS)
+        return password
+
+    def get(self, request, pk):
+        profile = get_object_or_404(Profile, pk=pk)
+
+        # Check if a KeyConfirmation already exists for this Profile
+        key_confirmation, created = KeyConfirmation.objects.get_or_create(profile=profile)
+
+        if created == False:
+            key_confirmation = get_object_or_404(KeyConfirmation, profile=profile)
+
+        key_confirmation.key = self.key_generation()
+        key_confirmation.save()
+
+        return Response({'detail': 'The key was generated successfully'}, status=HTTP_201_CREATED)
+
+    def post(self, request, pk):
+        profile = get_object_or_404(Profile, pk=pk)
+        key = request.data.get('key')
+
+        key_confirmation = get_object_or_404(KeyConfirmation, profile=profile)
+        # Check if the received 'key' matches the key stored in KeyConfirmation
+        if key_confirmation.key == key:
+            # If the keys match, set the 'confirmed' attribute of the profile to True and save
+            profile.confirmed = True
+            profile.save()
+
+            return Response({'detail': 'user successfully verified'})
+
+        return Response({'detail': "the key doesn't match"})

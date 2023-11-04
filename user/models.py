@@ -16,11 +16,16 @@ class Profile(models.Model):
             MaxValueValidator(1000)
         ]
     )
+    confirmed = models.BooleanField(default=False)
     number_of_completed_games = models.IntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
+
+class KeyConfirmation(models.Model):
+    key = models.CharField(max_length=10)
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
 
 @receiver(post_save, sender=User)

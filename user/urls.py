@@ -10,4 +10,5 @@ router.register(r'profiles', views.ViewSetProfile, basename='profile')
 urlpatterns = [
     path('', include(router.urls)),
     path('add-delete-point/<int:pk>/', views.PointAdd.as_view(), name='point-add'),
+    path('user-confirmation/<int:pk>/', views.ViewsConfirmed.as_view(), name='user-confirmation'),
 ]

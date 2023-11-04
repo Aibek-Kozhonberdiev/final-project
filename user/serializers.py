@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     avatar = serializers.ImageField(required=False, allow_null=True)
     point = serializers.IntegerField(read_only=True)
     number_of_completed_games = serializers.IntegerField(read_only=True)
+    confirmed = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = Profile
@@ -28,11 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'password', 'password2', 'email', 'profile')
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True}
-        }
-
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
