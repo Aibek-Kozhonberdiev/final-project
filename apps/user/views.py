@@ -11,6 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Profile, KeyConfirmation
 from .serializers import UserSerializer, ProfileSerializer
 from .paginations import UserResultsSetPagination
+from .my_email import SendGmail
 
 
 class ViewSetProfile(viewsets.ModelViewSet):
@@ -91,7 +92,7 @@ class PointAdd(APIView):
         except TypeError:
             return Response({'detail': 'Point value is missing'})
 
-class ViewsConfirmed(APIView):
+class ViewsConfirmed(APIView, SendGmail):
     CHARS = '1234567890'
 
     def key_generation(self):
@@ -111,6 +112,10 @@ class ViewsConfirmed(APIView):
 
         key_confirmation.key = self.key_generation()
         key_confirmation.save()
+
+        # Sending the key by email
+        text = f"Ваш ключ подтверждения: {key_confirmation.key}"
+        self.send_message(text, profile.user.pk)
 
         return Response({'detail': 'The key was generated successfully'}, status.HTTP_201_CREATED)
 
