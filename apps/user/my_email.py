@@ -11,12 +11,14 @@ class SendGmail:
 
     def send_message(self, text_message, pk):
         user = self.object_user(pk)
-        print(user.email)
+
+        image_url = f'http://{settings.MY_HOST}/static/quiz/img/QUIZ.png'
 
         send_mail(
-            "Subject here",
-            f"{text_message}",
+            "QUIZ",
+            text_message,
             settings.EMAIL_HOST_USER,
             [user.email],
             fail_silently=False,
+            html_message=f'<img src="{image_url}" alt="QUIZ"><p>{text_message}</p>'
         )

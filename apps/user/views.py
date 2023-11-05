@@ -20,7 +20,7 @@ class ViewSetProfile(viewsets.ModelViewSet):
     pagination_class = UserResultsSetPagination
 
 
-class ViewSetUser(viewsets.ModelViewSet):
+class ViewSetUser(viewsets.ModelViewSet, SendGmail):
     queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
     pagination_class = UserResultsSetPagination
@@ -35,6 +35,16 @@ class ViewSetUser(viewsets.ModelViewSet):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
+
+        text = f'Здравствуйте! '\
+               f'Добро пожаловать в {user.username}! Мы рады видеть вас в нашем увлекательном мире викторин и тестов.\n'\
+               f'Ваш аккаунт был успешно зарегистрирован. Теперь у вас есть доступ к нашей платформе, где вы сможете участвовать в увлекательных квизах, соревноваться с другими игроками и даже создавать собственные викторины.\n'\
+               'Не забудьте проверить наши последние тесты и статьи на нашем сайте.\n'\
+               f'Спасибо за выбор {user.username}! Мы желаем вам увлекательного времени и много интересных вопросов.'
+
+        # Sends a greeting to gmail
+        self.send_message(text, user.pk)
+
         return Response(user_data, status=status.HTTP_201_CREATED)
 
     def key_check(self, request):
