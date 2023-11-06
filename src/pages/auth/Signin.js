@@ -25,7 +25,7 @@ const Signin = () => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`http://aiba23334.pythonanywhere.com/api/v1/user/users/`, formData, {
+      const response = await axios.post(`http://aiba23334.pythonanywhere.com/api/user/users/`, formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${adminAccessToken}`,

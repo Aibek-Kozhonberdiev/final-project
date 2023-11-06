@@ -37,6 +37,7 @@ function App() {
         );
       } catch (error) {
         console.log(error.response.data.code === 'token_not_valid');
+        
         if (error.response.data.code === 'token_not_valid') {
           console.log('токен недействителен');
           startRefreshToken(dispatch);

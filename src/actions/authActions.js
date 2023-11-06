@@ -30,16 +30,17 @@ export const login = (username, password) => {
         const decoded = jwtDecode(access);
         const userId = decoded.user_id
 
-        if (username == 'root' && password == 'aibek_admin') {
-          localStorage.setItem('AdminAccessToken', access);
-        } else {
+        // if (username == 'root' && password == 'aibek_admin') {
+        //   localStorage.setItem('AdminAccessToken', access);
+        //   localStorage.setItem('isAuth', true);
+        // } else {
           localStorage.setItem('isAuth', true);
           localStorage.setItem('accessToken', access);
           localStorage.setItem('refreshToken', refresh);
           localStorage.setItem('userId', userId);
   
           dispatch(setTokens(access, refresh, userId));
-        }
+        // }
 
 
       }

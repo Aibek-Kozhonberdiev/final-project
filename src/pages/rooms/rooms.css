@@ -3,6 +3,11 @@
     justify-content: space-between;
     margin-bottom: 50px;
 }
+.rooms__list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 .rooms__btns {
     display: flex;
     gap: 30px;

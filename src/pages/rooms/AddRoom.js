@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from 'react-modal';
 
+import { useDispatch } from 'react-redux';
+import { AddRoomId } from '../../actions/quizzesActions';
 import { useSelector } from 'react-redux';
 
 const AddRoom = ({ isOpen, setIsOpen }) => {
   const [selectedQuiz, setSelectedQuiz] = useState(0);
   const [title, setTitle] = useState('');
-  const quizzes = useSelector((state) => state.quizzes.quizzes);
+  const dispatch = useDispatch();
+  const quizzes = JSON.parse(localStorage.getItem('quizzes'))
+
   const userId = parseInt(localStorage.getItem('userId'));
   const data = {
     name: title,
@@ -18,6 +22,7 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
 
   const handleSelectChange = (e) => {
     setSelectedQuiz(e.target.value);
+    console.log(typeof selectedQuiz)
   };
 
   const handleTitle = (e) => {
@@ -29,19 +34,25 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
 
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/v1/rooms/';
+      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/rooms/';
 
       const headers = {
         Authorization: `Bearer ${accessToken}`,
       };
       const response = await axios.post(apiUrl, data, { headers });
       setIsOpen(!isOpen)
-      console.log(response.data);
-      
+      dispatch(AddRoomId(response.data.id))
+      localStorage.setItem('roomId',response.data.id)
+
     } catch (error) {
       console.error('Ошибка:', error);
+      if (error.response.data.detail === 'The user is already in another room.') {
+        alert("Вы уже состоите в комнате")
+      }
     }
   };
+
+
   return (
     isOpen && (
       <Modal isOpen={isOpen} className={'quizzes__modal'}>
@@ -58,7 +69,7 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
                 placeholder='Title'
               />
             </div>
-            <select name='quizzes' id='quizzes' onChange={handleSelectChange}>
+            <select name='quizzes' id='quizzes' onClick={handleSelectChange}>
               {quizzes.map((quiz) => (
                 <option value={quiz.id}>{quiz.title}</option>
               ))}

@@ -30,7 +30,7 @@ const CreateQuestions = ({ isOpen, id }) => {
 
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/v1/questions/';
+      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/questions/';
 
       const headers = {
         Authorization: `Bearer ${accessToken}`,

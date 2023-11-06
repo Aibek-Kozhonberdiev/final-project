@@ -39,7 +39,7 @@ const QuizModal = ({ modalIsOpen, closeModal}) => {
       const dateTime = getCurrentTimeInDesiredFormat();
       console.log(category);
       const response = await axios(
-        'http://aiba23334.pythonanywhere.com/api/v1/quizzes/',
+        'http://aiba23334.pythonanywhere.com/api/quizzes/',
         {
           method: 'POST',
           headers: {

@@ -16,7 +16,7 @@ const Rooms = () => {
   const fetchRooms = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/v1/rooms/';
+      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/rooms/';
       const headers = {
         Authorization: `Bearer ${accessToken}`,
       };
@@ -34,7 +34,7 @@ const Rooms = () => {
 
   useEffect(() => {
     fetchRooms();
-  }, []);
+  }, [rooms]);
 
   return (
     <section className='rooms section'>

@@ -32,7 +32,7 @@ const Quizzes = () => {
   const fetchQuizzes = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/v1/quizzes/';
+      const apiUrl = 'http://aiba23334.pythonanywhere.com/api/quizzes/';
       const headers = {
         Authorization: `Bearer ${accessToken}`,
       };
@@ -40,6 +40,8 @@ const Quizzes = () => {
       const response = await axios(apiUrl, { headers });
       if (response.status === 200) {
         dispatch(addQuizzes(response.data.results))
+        localStorage.setItem('quizzes',JSON.stringify(response.data.results))
+        console.log(response.data.results)
       
       } else {
         console.error('Ошибка при получении данных:', response.status);

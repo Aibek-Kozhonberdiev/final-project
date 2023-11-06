@@ -21,7 +21,7 @@ const Room = ({room}) => {
     }
     const accessToken = localStorage.getItem('accessToken');
     try {
-      const response = await axios.patch(`http://aiba23334.pythonanywhere.com/api/v1/rooms/${room.id}/`, data, {
+      const response = await axios.patch(`http://aiba23334.pythonanywhere.com/api/rooms/${room.id}/`, data, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,

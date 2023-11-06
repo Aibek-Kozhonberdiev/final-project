@@ -3,4 +3,7 @@ export const addQuizzes = (quizzes) => ({
     quizzes,
   });
 
-  
+export const AddRoomId = (roomId) => ({
+  type: 'ADD_ROOMID',
+  roomId,
+})
