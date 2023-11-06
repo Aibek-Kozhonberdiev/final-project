@@ -56,6 +56,7 @@ class RoomSerializer(serializers.ModelSerializer):
             name=validated_data['name'],
             status=validated_data['status'],
             quizzes=validated_data['quizzes'],
+            private=validated_data['private']
         )
         room.members.set(user_set)
 

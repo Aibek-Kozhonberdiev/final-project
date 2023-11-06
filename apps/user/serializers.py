@@ -3,7 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from .models import Profile
+from .models import UserProfile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     confirmed = serializers.BooleanField(read_only=True)
 
     class Meta:
-        model = Profile
+        model = UserProfile
         fields = '__all__'
 
 

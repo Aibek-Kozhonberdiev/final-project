@@ -8,14 +8,14 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Profile, KeyConfirmation
+from .models import UserProfile, KeyConfirmation
 from .serializers import UserSerializer, ProfileSerializer
 from .paginations import UserResultsSetPagination
 from .my_email import SendGmail
 
 
 class ViewSetProfile(viewsets.ModelViewSet):
-    queryset = Profile.objects.all().order_by('-point')
+    queryset = UserProfile.objects.all().order_by('-point')
     serializer_class = ProfileSerializer
     pagination_class = UserResultsSetPagination
 
@@ -37,10 +37,10 @@ class ViewSetUser(viewsets.ModelViewSet, SendGmail):
         }
 
         text = f'Здравствуйте! '\
-               f'Добро пожаловать в {user.username}! Мы рады видеть вас в нашем увлекательном мире викторин и тестов.\n'\
-               f'Ваш аккаунт был успешно зарегистрирован. Теперь у вас есть доступ к нашей платформе, где вы сможете участвовать в увлекательных квизах, соревноваться с другими игроками и даже создавать собственные викторины.\n'\
+               f'Добро пожаловать, {user.username}! Мы рады видеть вас в нашем увлекательном мире викторин и тестов.\n'\
+               f'Ваш аккаунт успешно зарегистрирован. Теперь у вас есть доступ к нашей платформе, где вы можете участвовать в увлекательных викторинах, соревноваться с другими игроками и даже создавать своих собственных победителей.\n'\
                'Не забудьте проверить наши последние тесты и статьи на нашем сайте.\n'\
-               f'Спасибо за выбор {user.username}! Мы желаем вам увлекательного времени и много интересных вопросов.'
+               f'Спасибо, что выбрали {user.username}! Мы желаем вам увлекательного времени и много интересных вопросов.'
 
         # Sends a greeting to gmail
         self.send_message(text, user.pk)
@@ -73,7 +73,7 @@ class PointAdd(APIView):
     permission_classes = [IsAdminUser]
 
     def get_object(self, pk):
-        profile = get_object_or_404(Profile, pk=pk)
+        profile = get_object_or_404(UserProfile, pk=pk)
         return profile
 
     def change_point(self, profile, point):
@@ -112,7 +112,7 @@ class ViewsConfirmed(APIView, SendGmail):
         return password
 
     def get(self, request, pk):
-        profile = get_object_or_404(Profile, pk=pk)
+        profile = get_object_or_404(UserProfile, pk=pk)
 
         # Check if a KeyConfirmation already exists for this Profile
         key_confirmation, created = KeyConfirmation.objects.get_or_create(profile=profile)
@@ -130,7 +130,7 @@ class ViewsConfirmed(APIView, SendGmail):
         return Response({'detail': 'The key was generated successfully'}, status.HTTP_201_CREATED)
 
     def post(self, request, pk):
-        profile = get_object_or_404(Profile, pk=pk)
+        profile = get_object_or_404(UserProfile, pk=pk)
         key = request.data.get('key')
 
         key_confirmation = get_object_or_404(KeyConfirmation, profile=profile)

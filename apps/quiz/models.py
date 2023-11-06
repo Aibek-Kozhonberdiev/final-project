@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_delete, m2m_changed
 from django.dispatch import receiver
 
-from apps.user.models import Profile
+from apps.user.models import UserProfile
 
 
 class Quiz(models.Model):
@@ -106,6 +106,6 @@ def update_profile_completed_games(sender, instance, action, reverse, model, pk_
     """
     if action == "post_add":
         for pk in pk_set:
-            profile = Profile.objects.get(pk=pk)
+            profile = UserProfile.objects.get(pk=pk)
             profile.number_of_completed_games += 1
             profile.save()
