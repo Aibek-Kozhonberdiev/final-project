@@ -34,6 +34,7 @@ class UserProfile(models.Model):
             self.confirmed = True
         super(UserProfile, self).save(*args, **kwargs)
 
+
 class KeyConfirmation(models.Model):
     key = models.CharField(max_length=10)
     profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)

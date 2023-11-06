@@ -10,15 +10,18 @@ class ViewSetCategory(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [IsAdminOrReadOnlyCustom]
 
+
 class ViewSetQuestion(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [IsAdminOrReadOnlyCustom]
 
+
 class ViewSetQuiz(viewsets.ModelViewSet):
     queryset = Quiz.objects.all().order_by('-create', '-update')
     serializer_class = QuizSerializer
     permission_classes = [IsAdminOrReadOnlyCustom]
+
 
 class ViewSetRoom(viewsets.ModelViewSet):
     queryset = Room.objects.all()

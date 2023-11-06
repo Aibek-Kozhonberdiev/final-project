@@ -31,6 +31,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Question(models.Model):
     CHOICES = (
         (1, 'Choice A'),
@@ -49,8 +50,12 @@ class Question(models.Model):
     time = models.IntegerField(default=20)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='question_set')
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     def __str__(self):
         return self.quiz.title
+
 
 class Room(models.Model):
     CHARS = '1234567890'
@@ -80,7 +85,6 @@ class Room(models.Model):
         if self.private == True:
             self.password = self.password_generation()
         super(Room, self).save(*args, **kwargs)
-
 
 @receiver(post_save, sender=Question)
 def update_quiz_question_count(sender, instance, **kwargs):

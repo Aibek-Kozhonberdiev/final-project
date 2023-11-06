@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from .models import Category, Quiz, Question, Room
 
+
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -27,8 +28,10 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quiz
         fields = '__all__'
 
+
 class RoomSerializer(serializers.ModelSerializer):
     password = serializers.CharField(read_only=True)
+
 
     class Meta:
         model = Room
@@ -71,5 +74,6 @@ class RoomSerializer(serializers.ModelSerializer):
         instance.status = validated_data.get('status', instance.status)
         instance.quizzes = validated_data.get('quizzes', instance.quizzes)
         instance.members.set(user_set)
+        instance.save()
 
         return instance

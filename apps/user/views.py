@@ -102,6 +102,7 @@ class PointAdd(APIView):
         except TypeError:
             return Response({'detail': 'Point value is missing'})
 
+
 class ViewsConfirmed(APIView, SendGmail):
     CHARS = '1234567890'
 
