@@ -18,7 +18,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
+    userprofile = ProfileSerializer(read_only=True)
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -28,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'password2', 'email', 'profile')
+        fields = ('id', 'username', 'password', 'password2', 'email', 'userprofile')
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
