@@ -2,6 +2,7 @@ from django.utils import timezone
 from rest_framework import serializers
 
 from .models import Category, Quiz, Question, Room
+from ..user.models import UserProfile
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -27,6 +28,20 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
         fields = '__all__'
+
+    def user_verification(self, pk):
+        profile = UserProfile.objects.get(user=pk)
+
+        # check if the user is verified
+        if profile.confirmed != True:
+            raise serializers.ValidationError({'detail': "user is not verified"})
+
+    def create(self, validated_data):
+        pk = validated_data['user']
+        self.user_verification(pk)
+
+        instance = super().create(validated_data)
+        return instance
 
 
 class RoomSerializer(serializers.ModelSerializer):
@@ -55,25 +70,13 @@ class RoomSerializer(serializers.ModelSerializer):
         user_set = validated_data['members']
         self.checking_the_user_for_credentials(user_set)  # check user for rooms
 
-        room = Room.objects.create(
-            name=validated_data['name'],
-            status=validated_data['status'],
-            quizzes=validated_data['quizzes'],
-            private=validated_data['private']
-        )
-        room.members.set(user_set)
-
-        return room
+        instance = super().create(validated_data)
+        return instance
 
     def update(self, instance, validated_data):
         user_set = validated_data['members']
         excluded_room_id = instance.pk
         self.checking_the_user_for_credentials(user_set, excluded_room_id)  # check user for rooms
 
-        instance.name = validated_data.get('name', instance.name)
-        instance.status = validated_data.get('status', instance.status)
-        instance.quizzes = validated_data.get('quizzes', instance.quizzes)
-        instance.members.set(user_set)
-        instance.save()
-
+        instance = super().update(instance, validated_data)
         return instance
