@@ -1,5 +1,7 @@
 import random
 
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from django.contrib.auth.models import User
 from rest_framework import viewsets, status
 from rest_framework.generics import get_object_or_404
@@ -89,6 +91,16 @@ class PointAdd(APIView):
             profile.point = new_point
         profile.save()
 
+    @swagger_auto_schema(
+        operation_description='To add and remove points from +10 for a correct answer -3 for an incorrect one',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'point': openapi.Schema(type=openapi.TYPE_INTEGER),
+            }
+        )
+
+    )
     def post(self, request, pk):
         """
         Handle a POST request to update a Profile's point value.
@@ -104,14 +116,15 @@ class PointAdd(APIView):
 
 
 class ViewsConfirmed(APIView, SendGmail):
-    CHARS = '1234567890'
+    chars = '1234567890'
 
     def key_generation(self):
         password = ''
         for i in range(10):
-            password += random.choice(self.CHARS)
+            password += random.choice(self.chars)
         return password
 
+    @swagger_auto_schema(operation_description='To generate a key the user by email')
     def get(self, request, pk):
         profile = get_object_or_404(UserProfile, pk=pk)
 
@@ -130,6 +143,15 @@ class ViewsConfirmed(APIView, SendGmail):
 
         return Response({'detail': 'The key was generated successfully'}, status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(
+        operation_description='Sends a key to verify the user. Which received via email',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'key': openapi.Schema(type=openapi.TYPE_STRING),
+            }
+        )
+    )
     def post(self, request, pk):
         profile = get_object_or_404(UserProfile, pk=pk)
         key = request.data.get('key')
