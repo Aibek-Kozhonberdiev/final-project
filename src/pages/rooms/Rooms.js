@@ -8,11 +8,12 @@ import axios from 'axios';
 import AddRoom from './AddRoom.js';
 
 const Rooms = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [rooms, setRooms] = useState([]);
-   const handleAddRoom =() => {
-    setIsOpen(!isOpen)
-   }
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleAddRoom = () => {
+    setIsOpen(!isOpen);
+  };
   const fetchRooms = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -35,7 +36,6 @@ const Rooms = () => {
   useEffect(() => {
     fetchRooms();
   }, [rooms]);
-  
 
   return (
     <section className='rooms section'>
@@ -44,19 +44,27 @@ const Rooms = () => {
         <p className='section__subtitle'>Выберите комнату</p>
 
         <div className='rooms_filters'>
-          <Input className={'rooms__input'} />
+          <Input
+            className={'rooms__input'}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           <div className='rooms__btns'>
-            <Button text={'Создать'} onClick={handleAddRoom}/>
+            <Button text={'Создать'} onClick={handleAddRoom} />
           </div>
         </div>
 
         <div className='rooms__list'>
-          {rooms.map((room, idx) => (
-            <Room room={room} key={idx}/>
-          ))}
+        {rooms
+    .filter((room) =>
+      room.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .map((room, idx) => (
+      <Room room={room} key={idx} />
+    ))}
         </div>
-         <AddRoom isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <AddRoom isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </section>
   );

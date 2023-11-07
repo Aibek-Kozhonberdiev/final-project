@@ -5,7 +5,10 @@ import axios from 'axios';
 
 const Room = ({room}) => {
   const userId = parseInt(localStorage.getItem('userId'))
+  const lobby = JSON.parse(localStorage.getItem('lobby'))
 
+
+  
 
   const data = {
     name: room.name,
@@ -44,7 +47,7 @@ const Room = ({room}) => {
       <div className='rooms__desc'>
         <p className='rooms__name'>Название комнаты: {room.name}</p>
       </div>
-      <Button text={'Присоединиться'} className={'collection__btn'} onClick={handleJoin}/>
+      {room.id !== lobby.id ? <Button text={'Присоединиться'} className={'collection__btn'} onClick={handleJoin}/> : <p className='section__subtitle'>Вы состоите в этой комнате</p>}
     </div>
   );
 };

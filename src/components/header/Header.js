@@ -5,7 +5,7 @@ import Button from '../Button';
 
 
 const Header = () => {
-  
+  const lobby = localStorage.getItem('lobby')
   return (
     <header className='header'>
       <div className='container header__wrapper'>
@@ -22,9 +22,9 @@ const Header = () => {
           </NavLink>
 
 
-          <NavLink to='/lobby' className='header__link'>
+         {lobby && <NavLink to='/lobby' className='header__link'>
             <Button text={'Играть'} className={'header__btn'}/>
-          </NavLink>
+          </NavLink>}
 
         </nav>
 

@@ -15,6 +15,7 @@ import { startRefreshToken } from './reducers/tokenRefreshReducer';
 import CreateQuestions from './pages/quizzes/CreateQuestions';
 import Notification from './components/Notification.js';
 import { login } from './actions/authActions.js';
+import Footer from './components/footer/Footer.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function App() {
             <Route path='/create-questions' element={<CreateQuestions />} />
             <Route path='/notification' element={<Notification />} />
           </Routes>
+          <Footer/>
         </Router>
       ) : (
         <Router>
