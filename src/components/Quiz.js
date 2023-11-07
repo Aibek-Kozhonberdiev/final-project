@@ -7,9 +7,17 @@ import CreateQuestions from '../pages/quizzes/CreateQuestions';
 const Quiz = ({ el }) => {
 
   const [qModalIsOpen, setQModalIsOpen] = useState('')
+  const [myQuiz, setMyquiz] = useState(false)
+  const userId = JSON.parse(localStorage.getItem('userId'));
+  const quizzes = JSON.parse(localStorage.getItem('quizzes'));
+  // if (el.user === userId) {
+  //   setMyquiz(true)
+  // }
+  
 const handleAddQustions = () => {
   setQModalIsOpen(!qModalIsOpen)
 }
+
 
 
   return (
@@ -27,7 +35,7 @@ const handleAddQustions = () => {
         ))}
 
       </div>
-      <button onClick={()=>{handleAddQustions()}}>Add questions</button>
+      {el.user === userId ? <button onClick={()=>{handleAddQustions()}}>добавить вопросы</button> : null}
       <CreateQuestions isOpen= {qModalIsOpen} id={el.id}/>
 
     </div>

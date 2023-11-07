@@ -8,7 +8,7 @@ const Signin = () => {
   
   const dispatch = useDispatch();
   dispatch(login('root', 'aibek_admin'));
-  const adminAccessToken = localStorage.getItem('AdminAccessToken')
+  const adminAccessToken = localStorage.getItem('adminAccessToken')
 
   const [formData, setFormData] = useState({
     username: '',
@@ -25,7 +25,7 @@ const Signin = () => {
   const handleSubmit = async(event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`http://aiba23334.pythonanywhere.com/api/user/users/`, formData, {
+      const response = await axios.post(`http://aiba23334.pythonanywhere.com/api/users/`, formData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${adminAccessToken}`,

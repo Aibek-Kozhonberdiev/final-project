@@ -29,11 +29,11 @@ const CreateQuestions = ({ isOpen, id }) => {
     e.preventDefault();
 
     try {
-      const accessToken = localStorage.getItem('accessToken');
+      const adminAccessToken = localStorage.getItem('adminAccessToken')
       const apiUrl = 'http://aiba23334.pythonanywhere.com/api/questions/';
 
       const headers = {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${adminAccessToken}`,
       };
       const response = await axios.post(apiUrl, data, { headers });
       console.log(response);

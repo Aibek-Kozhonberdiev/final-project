@@ -1,22 +1,39 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Timer = ({setTimeUp}) => {
-  const [time, setTime] = useState(60);
+const Timer = ({ setTimeUp }) => {
+  const initialTime = 10; 
+  const [time, setTime] = useState(initialTime);
+
   useEffect(() => {
+
+    const storedStartTime = localStorage.getItem('timerStartTime');
+    if (storedStartTime) {
+
+      const currentTime = Date.now();
+      const startTime = parseInt(storedStartTime, 10);
+      const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+
+      if (elapsedTime < initialTime) {
+
+        const remainingTime = initialTime - elapsedTime;
+        setTime(remainingTime);
+      }
+    }
+
+
     const timer = setInterval(() => {
       if (time > 0) {
-        setTime(time - 1);
+        setTime((prevTime) => prevTime - 1);
       } else {
         clearInterval(timer);
         setTimeUp(true);
       }
-    }, 100);
+    }, 1000); 
 
     return () => {
       clearInterval(timer);
     };
-  }, [time]);
+  }, [time, setTimeUp]);
 
   return (
     <div>

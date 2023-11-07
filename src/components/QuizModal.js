@@ -34,7 +34,7 @@ const QuizModal = ({ modalIsOpen, closeModal}) => {
   const handleCreateQuiz = async (e) => {
     e.preventDefault();
     try {
-      const accessToken = localStorage.getItem('accessToken');
+      const adminAccessToken = localStorage.getItem('adminAccessToken')
       const userId = localStorage.getItem('userId');
       const dateTime = getCurrentTimeInDesiredFormat();
       console.log(category);
@@ -44,7 +44,7 @@ const QuizModal = ({ modalIsOpen, closeModal}) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${adminAccessToken}`,
           },
           data: {
             update: `${dateTime}`,

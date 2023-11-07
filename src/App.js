@@ -11,13 +11,15 @@ import Signin from './pages/auth/Signin';
 import Lobby from './pages/lobby/Lobby';
 import Game from './pages/game/Game';
 import axios from 'axios';
-import {startRefreshToken} from './reducers/tokenRefreshReducer'
+import { startRefreshToken } from './reducers/tokenRefreshReducer';
 import CreateQuestions from './pages/quizzes/CreateQuestions';
+import Notification from './components/Notification.js';
+import { login } from './actions/authActions.js';
 
 function App() {
-  
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
+
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -37,13 +39,14 @@ function App() {
         );
       } catch (error) {
         console.log(error.response.data.code === 'token_not_valid');
-        
+
         if (error.response.data.code === 'token_not_valid') {
           console.log('токен недействителен');
           startRefreshToken(dispatch);
         }
       }
     };
+
     if (isAuth) {
       verifyToken();
     }
@@ -57,14 +60,13 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/rooms' element={<Rooms />} />
-            <Route path='/quizzes' element={<Quizzes/>} />
+            <Route path='/quizzes' element={<Quizzes />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/lobby' element={<Lobby />} />
             <Route path='/game' element={<Game />} />
             <Route path='/create-questions' element={<CreateQuestions />} />
-            
-            
+            <Route path='/notification' element={<Notification />} />
           </Routes>
         </Router>
       ) : (

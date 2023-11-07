@@ -22,7 +22,7 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
 
   const handleSelectChange = (e) => {
     setSelectedQuiz(e.target.value);
-    console.log(typeof selectedQuiz)
+
   };
 
   const handleTitle = (e) => {
@@ -33,16 +33,17 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
     e.preventDefault();
 
     try {
-      const accessToken = localStorage.getItem('accessToken');
+      const adminAccessToken = localStorage.getItem('adminAccessToken')
       const apiUrl = 'http://aiba23334.pythonanywhere.com/api/rooms/';
 
       const headers = {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${adminAccessToken}`,
       };
       const response = await axios.post(apiUrl, data, { headers });
       setIsOpen(!isOpen)
       dispatch(AddRoomId(response.data.id))
       localStorage.setItem('roomId',response.data.id)
+      localStorage.setItem('lobby',JSON.stringify(response.data))
 
     } catch (error) {
       console.error('Ошибка:', error);

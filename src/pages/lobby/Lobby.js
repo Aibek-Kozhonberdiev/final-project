@@ -32,6 +32,7 @@ const Lobby = () => {
   useEffect(() => {
     getLobby();
   }, []);
+  
   const quiz = quizzes.find((quiz) => quiz.id === lobby.quizzes);
   const quizName = quiz?.title;
   console.log(lobby);
@@ -82,9 +83,9 @@ const Lobby = () => {
             <p>Выбранный квиз: {quizName}</p>
           </div>
 
-          {/* <NavLink to='/game' className='header__link' > */}
-            <Button text={'Играть'} className={'header__btn lobby__btn'} onClick={startGame} />
-          {/* </NavLink> */}
+          <NavLink to='/game' className='header__link' onClick={startGame}>
+            <Button text={'Играть'} className={'header__btn lobby__btn'} />
+          </NavLink>
         </div>
       </div>
     </section>

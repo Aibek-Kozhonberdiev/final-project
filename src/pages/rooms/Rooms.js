@@ -35,6 +35,7 @@ const Rooms = () => {
   useEffect(() => {
     fetchRooms();
   }, [rooms]);
+  
 
   return (
     <section className='rooms section'>
