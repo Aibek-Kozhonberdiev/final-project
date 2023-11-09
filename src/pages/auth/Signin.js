@@ -143,21 +143,24 @@ const Signin = () => {
             </p>
 
             {isRegistered ? (
-              <div className='login__input'>
-                <label htmlFor='password'>Введите код: </label>
-                <input
-                  type='code'
-                  placeholder='введите полученный код'
-                  name='code'
-                  value={formData.code}
-                  onInput={handleInputChange}
-                />
+              <>
+                
+                <div className='signin__confirm login__input'>
+                  <label htmlFor='password'>Введите код: </label>
+                  <input
+                    type='code'
+                    placeholder='введите полученный код'
+                    name='code'
+                    value={formData.code}
+                    onInput={handleInputChange}
+                  />
+                </div>
                 <Button
                   onClick={sendCode}
                   className={'login__btn'}
                   text={'Подтвердить код'}
                 />
-              </div>
+              </>
             ) : (
               <Button
                 onClick={handleSubmit}

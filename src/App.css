@@ -139,7 +139,7 @@ li {
   padding: 0 15px;
 }
 .login {
-  height: calc(100vh - 70px);
+  height: 100vh;
   display: flex;
   align-items: center;
 }
@@ -183,6 +183,9 @@ margin-left: 10px;
 }
 .login__link {
   text-decoration: underline;
+}
+.signin__confirm {
+  
 }
 .notification {
 

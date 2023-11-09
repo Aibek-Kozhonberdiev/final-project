@@ -15,6 +15,7 @@ const Room = ({room}) => {
   
   const handleJoin =async(e) => {
     e.preventDefault()
+    localStorage.setItem('roomId', room.id)
     if (!room.members.includes(userId)) {
 
       data.members = [...data.members, userId]

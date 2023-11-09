@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 const Notification = ({ nextQuestion }) => {
+    localStorage.removeItem('currentQuestionIndex')
+
   const userId = JSON.parse(localStorage.getItem('userId'));
   const lobby = JSON.parse(localStorage.getItem('lobby'));
   const [points,setPoints] = useState(0)

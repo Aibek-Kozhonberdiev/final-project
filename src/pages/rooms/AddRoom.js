@@ -7,10 +7,11 @@ import { AddRoomId } from '../../actions/quizzesActions';
 import { useSelector } from 'react-redux';
 
 const AddRoom = ({ isOpen, setIsOpen }) => {
-  const [selectedQuiz, setSelectedQuiz] = useState(0);
+  const quizzes = JSON.parse(localStorage.getItem('quizzes'))
+  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0].id);
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
-  const quizzes = JSON.parse(localStorage.getItem('quizzes'))
+
 
   const userId = parseInt(localStorage.getItem('userId'));
   const data = {

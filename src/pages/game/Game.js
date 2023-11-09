@@ -15,7 +15,8 @@ const Game = () => {
 
   const quiz = quizzes?.find((quiz) => quiz?.id === lobby?.quizzes);
   const questionSets = quiz?.question_set || [];
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const initialQuestionIndex = parseInt(localStorage.getItem('currentQuestionIndex')) || 0;
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialQuestionIndex);
   const [isCorrect, setIsCorrect] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(0);
 
@@ -32,7 +33,7 @@ const Game = () => {
   const nextQuestion = async () => {
 
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      // setIsCorrect(0); // Сбросить баллы для следующего вопроса
+      
       setTimeUp(!isTimeUp);
   
       try {
@@ -50,9 +51,10 @@ const Game = () => {
       } catch (error) {
         console.error('Ошибка:', error);
       }
-    
+
   };
-  
+  localStorage.setItem('currentQuestionIndex', currentQuestionIndex);
+
   
 
   return isTimeUp ? (
