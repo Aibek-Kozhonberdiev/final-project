@@ -7,13 +7,13 @@ from rest_framework import viewsets, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework import permissions
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import UserProfile, KeyConfirmation
 from .serializers import UserSerializer, ProfileSerializer
 from .paginations import UserResultsSetPagination
-from .my_email import SendGmail
+from .my_email import send_message
 
 
 class ViewSetProfile(viewsets.ModelViewSet):
@@ -22,7 +22,7 @@ class ViewSetProfile(viewsets.ModelViewSet):
     pagination_class = UserResultsSetPagination
 
 
-class ViewSetUser(viewsets.ModelViewSet, SendGmail):
+class ViewSetUser(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
     pagination_class = UserResultsSetPagination
@@ -45,7 +45,7 @@ class ViewSetUser(viewsets.ModelViewSet, SendGmail):
                f'Спасибо, что выбрали {user.username}! Мы желаем вам увлекательного времени и много интересных вопросов.'
 
         # Sends a greeting to gmail
-        self.send_message(text, user.pk)
+        send_message(text, user.pk)
 
         return Response(user_data, status=status.HTTP_201_CREATED)
 
@@ -72,7 +72,7 @@ class ViewSetUser(viewsets.ModelViewSet, SendGmail):
 
 
 class PointAdd(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [permissions.IsAdminUser]
 
     def get_object(self, pk):
         profile = get_object_or_404(UserProfile, pk=pk)
@@ -115,7 +115,7 @@ class PointAdd(APIView):
             return Response({'detail': 'Point value is missing'})
 
 
-class ViewsConfirmed(APIView, SendGmail):
+class ViewsConfirmed(APIView):
     chars = '1234567890'
 
     def key_generation(self):
@@ -139,7 +139,7 @@ class ViewsConfirmed(APIView, SendGmail):
 
         # Sending the key by email
         text = f"Ваш ключ подтверждения: {key_confirmation.key}"
-        self.send_message(text, profile.user.pk)
+        send_message(text, profile.user.pk)
 
         return Response({'detail': 'The key was generated successfully'}, status.HTTP_201_CREATED)
 

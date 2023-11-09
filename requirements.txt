@@ -26,3 +26,4 @@ sqlparse==0.2.4
 telebot==0.0.5
 uritemplate==4.1.1
 urllib3==2.0.7
+channels==3.0.4

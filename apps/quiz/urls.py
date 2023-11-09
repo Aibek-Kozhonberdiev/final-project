@@ -11,4 +11,5 @@ router.register(r'rooms', views.ViewSetRoom)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('rooms_websocket', views.rooms, name='rooms'),
 ]

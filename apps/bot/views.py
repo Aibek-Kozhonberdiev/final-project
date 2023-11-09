@@ -4,10 +4,10 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
-from .bot_main import SendMessage
+from .bot_main import send_message
 
 
-class ComplaintMessage(APIView, SendMessage):
+class ComplaintMessage(APIView):
     def get_object(self, pk):
         return get_object_or_404(User, pk=pk)
 
@@ -26,4 +26,4 @@ class ComplaintMessage(APIView, SendMessage):
         user = self.get_object(pk)
         message_text = f"Жалоба на пользователя: {user.username}\n{text}"
 
-        return self.send_message(message_text)
+        return send_message(message_text)

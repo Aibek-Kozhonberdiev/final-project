@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Lib
+    'channels',
     'rest_framework',
     'corsheaders',
     'drf_yasg',
@@ -56,6 +57,15 @@ INSTALLED_APPS = [
     'apps.quiz.apps.QuizConfig',
     'apps.bot.apps.BotConfig',
 ]
+
+ASGI_APPLICATION = 'config.asgi.application'
+
+# WebSocket
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +100,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -104,9 +113,9 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'djongo',
-#         'NAME': os.getenv('NAME'),  # name database MongoDp from .enf
-#         'HOST': os.getenv('HOST'),  # default host localhost
-#         'PORT': os.getenv('PORT'),  # default port 27017
+#         'NAME': os.getenv('NAME_MONGO'),  # name database MongoDp from .env
+#         # 'HOST': os.getenv('HOST_MONGO'),  # default host localhost
+#         # 'PORT': os.getenv('PORT_MONGO'),  # default port 27017
 #     }
 # }
 
@@ -238,6 +247,5 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # Telegram bot
-PROXY_URL = os.getenv('PROXY')
 TELEGRAM_KEY = os.getenv('TELEGRAM_KEY')
 ADMIN_TELEGRAM_ID = os.getenv('ADMIN_TELEGRAM_ID')
