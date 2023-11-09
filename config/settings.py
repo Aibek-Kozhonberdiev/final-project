@@ -105,19 +105,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': os.getenv('NAME_MONGO'),  # name database MongoDp from .env
+        'HOST': os.getenv('HOST_MONGO'),  # default host localhost
+        'PORT': os.getenv('PORT_MONGO'),  # default port 27017
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': os.getenv('NAME_MONGO'),  # name database MongoDp from .env
-#         # 'HOST': os.getenv('HOST_MONGO'),  # default host localhost
-#         # 'PORT': os.getenv('PORT_MONGO'),  # default port 27017
-#     }
-# }
 
 
 # Password validation
