@@ -45,7 +45,7 @@ const Quizzes = () => {
   const quizzes = useSelector((state) => state.quizzes.quizzes);
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [quizzes]);
 
   const [isMyQuizzes, setIsMyquizzes] = useState(false);
   const userId = JSON.parse(localStorage.getItem('userId'));
@@ -82,12 +82,6 @@ console.log(isMyQuizzes)
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
-
-          <select className='quizzes__select' name='Категория' id=''>
-            <option>категория</option>
-            <option>категория</option>
-            <option>категория</option>
-          </select>
 
           <select className='quizzes__select' onChange={handleMyQuizzes}>
             <option>все квизы</option>

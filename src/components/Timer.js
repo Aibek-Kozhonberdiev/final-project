@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 const Timer = ({ setTimeUp }) => {
-  const initialTime = 10; 
+  const initialTime = 7; 
   const [time, setTime] = useState(initialTime);
 
   useEffect(() => {
-
     const storedStartTime = localStorage.getItem('timerStartTime');
+    if (!storedStartTime) {
+
+      const startTime = Date.now();
+      localStorage.setItem('timerStartTime', startTime);
+    }
     if (storedStartTime) {
 
       const currentTime = Date.now();
@@ -26,6 +30,7 @@ const Timer = ({ setTimeUp }) => {
         setTime((prevTime) => prevTime - 1);
       } else {
         clearInterval(timer);
+        localStorage.removeItem('timerStartTime')
         setTimeUp(true);
       }
     }, 1000); 

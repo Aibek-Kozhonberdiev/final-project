@@ -1,46 +1,94 @@
 import React, { useState } from 'react';
 import Button from '../../components/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/authActions.js';
 import axios from 'axios';
 
 const Signin = () => {
-  
   const dispatch = useDispatch();
-  dispatch(login('root', 'aibek_admin'));
-  const adminAccessToken = localStorage.getItem('adminAccessToken')
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [error, setError] = useState('false');
 
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     password2: '',
     email: '',
+    code: '',
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
-
-  const handleSubmit = async(event) => {
-    event.preventDefault();
+  const getConfirmation = async (userId) => {
+    console.log('код отправляется');
+    const adminAccessToken = localStorage.getItem('adminAccessToken');
+    localStorage.setItem('userId', userId);
     try {
-      const response = await axios.post(`http://aiba23334.pythonanywhere.com/api/users/`, formData, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${adminAccessToken}`,
-        },
-      });
+      const response = await axios(
+        `http://aiba23334.pythonanywhere.com/api/user-confirmation/${userId}/`
+      );
 
-      console.log('Успешно обновлено:', response.data);
+      console.log('код отправлен');
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+  const sendCode = async (e) => {
+    e.preventDefault();
+    console.log('юзер ввел код');
+    const adminAccessToken = localStorage.getItem('adminAccessToken');
+    const userId = localStorage.getItem('userId');
+    try {
+      const response = await axios.post(
+        `http://aiba23334.pythonanywhere.com/api/user-confirmation/${userId}/`,
+        { key: formData.code },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${adminAccessToken}`,
+          },
+        }
+      );
+
+      console.log('сервер получил код');
+      setIsConfirmed(true);
+      localStorage.setItem('isConfirmed', true);
       const { username, password } = formData;
       dispatch(login(username, password));
     } catch (error) {
-      
       console.error('Ошибка:', error);
     }
-    
   };
+
+  const handleSubmit = async (event) => {
+    const adminAccessToken = localStorage.getItem('adminAccessToken');
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        `http://aiba23334.pythonanywhere.com/api/users/`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${adminAccessToken}`,
+          },
+        }
+      );
+
+      const userId = response.data.user.id;
+      getConfirmation(userId);
+
+      setIsRegistered(true);
+    } catch (error) {
+      console.error('Ошибка:', error);
+      setError(error.responce.data);
+    }
+  };
+
   return (
     <section className='login'>
       <div className='login__container container'>
@@ -90,12 +138,33 @@ const Signin = () => {
                 onChange={handleInputChange}
               />
             </div>
+            <p className='section__subtitle'>
+              На ваш почтовый адрес придет код для подтверждения аккаунта
+            </p>
 
-            <Button
-              onClick={handleSubmit}
-              className={'login__btn'}
-              text={'зарегистрироваться'}
-            />
+            {isRegistered ? (
+              <div className='login__input'>
+                <label htmlFor='password'>Введите код: </label>
+                <input
+                  type='code'
+                  placeholder='введите полученный код'
+                  name='code'
+                  value={formData.code}
+                  onInput={handleInputChange}
+                />
+                <Button
+                  onClick={sendCode}
+                  className={'login__btn'}
+                  text={'Подтвердить код'}
+                />
+              </div>
+            ) : (
+              <Button
+                onClick={handleSubmit}
+                className={'login__btn'}
+                text={'зарегистрироваться'}
+              />
+            )}
           </form>
         </div>
       </div>

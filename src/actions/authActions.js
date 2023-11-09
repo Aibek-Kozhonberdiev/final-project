@@ -11,10 +11,12 @@ export const setTokens = (accessToken, refreshToken, userId) => ({
 export const login = (username, password) => {
   return async (dispatch) => {
     try {
+      const adminAccessToken = localStorage.getItem('adminAccessToken')
       const response = await fetch('http://aiba23334.pythonanywhere.com/api/token/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${adminAccessToken}`,
         },
         body: JSON.stringify({
           username: username,

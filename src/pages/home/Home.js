@@ -3,6 +3,7 @@ import Button from '../../components/Button.js';
 import './home.css';
 import { useSelector } from 'react-redux';
 import Login from '../auth/Login.js';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
   const isAuth = useSelector((state) => (state.auth.isAuth));
@@ -20,8 +21,10 @@ const Home = () => {
             Присоединяйся к игре по коду и выбирай квиз.
           </p>
           <div className='main__buttons'>
-            <Button text={'Start'} className={'main__btn'} />
-            <Button text={'Создать комнату'} className={'main__btn-gray'} />
+          <NavLink to='/lobby' className='header__link'>
+            <Button text={'Играть'} className={'header__btn'}/>
+          </NavLink>
+
           </div>
           <div className='main__benefits'>
             <div className='main__benefit'>
@@ -90,7 +93,7 @@ const Home = () => {
       </div>
     </main>
       </div>
-    ) : <Login />
+    ) : <Login /> 
 
   );
 };

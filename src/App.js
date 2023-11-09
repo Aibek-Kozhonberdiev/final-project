@@ -19,9 +19,9 @@ import Footer from './components/footer/Footer.js';
 
 function App() {
   const dispatch = useDispatch();
-
+  dispatch(login('root', 'aibek_admin'));
   const isAuth = useSelector((state) => state.auth.isAuth);
-
+  
   useEffect(() => {
     const verifyToken = async () => {
       const accessToken = localStorage.getItem('accessToken');
@@ -68,6 +68,7 @@ function App() {
             <Route path='/game' element={<Game />} />
             <Route path='/create-questions' element={<CreateQuestions />} />
             <Route path='/notification' element={<Notification />} />
+
           </Routes>
           <Footer/>
         </Router>

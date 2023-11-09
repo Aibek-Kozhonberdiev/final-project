@@ -5,7 +5,36 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
+
 const Lobby = () => {
+
+  // useEffect(() => {
+  //   const ws = new WebSocket(`wss://aiba23334.pythonanywhere.com/api/rooms/rooms_websocket`);
+  
+  //   // Set up event handlers
+  //   ws.onopen = () => {
+  //     console.log('WebSocket connected');
+  //   };
+  //   ws.onerror = (error) => {
+  //     console.error(error);
+  //   };
+  
+  //   ws.onmessage = (event) => {
+  //     const jsonData = JSON.parse(event.data);
+  //     // Handle incoming WebSocket messages as needed
+  //     console.log('Received message:', jsonData);
+  //   };
+  
+  //   ws.onclose = () => {
+  //     console.log('WebSocket closed');
+  //   };
+  
+  //   // Clean up the WebSocket connection when the component unmounts
+  //   return () => {
+  //     ws.close();
+  //   };
+  // }, []);
+
   const roomId = parseInt(localStorage.getItem('roomId'));
   const accessToken = localStorage.getItem('accessToken');
   const quizzes = JSON.parse(localStorage.getItem('quizzes'));
@@ -36,6 +65,7 @@ const Lobby = () => {
   const quiz = quizzes.find((quiz) => quiz.id === lobby.quizzes);
   const quizName = quiz?.title;
   console.log(lobby);
+  const adminAccessToken = localStorage.getItem('adminAccessToken')
 
   const startGame = async() => {
     try {
@@ -51,7 +81,7 @@ const Lobby = () => {
         status: "in progress",
       }, {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${adminAccessToken}`,
         },
       });
     
@@ -63,6 +93,7 @@ const Lobby = () => {
     } catch (error) {
       console.error('Ошибка:', error);
     }
+   
   };
   return (
     <section className='section lobby'>

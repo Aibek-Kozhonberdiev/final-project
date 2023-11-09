@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './footer.css';
 import { NavLink } from 'react-router-dom';
+import Complaint from './Complaint';
 
 const Footer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <footer className='section footer'>
+    <footer className='footer'>
       <div className='container footer__container'>
         <div className='footer__logo'>
           <p className='header__logo'>QUIZ</p>
@@ -19,10 +25,11 @@ const Footer = () => {
           </NavLink>
 
 
-          <NavLink to='/' className='header__link'>
+          <NavLink className='header__link' onClick={handleModal}>
             Оставить отзыв
           </NavLink>
         </nav>
+        <Complaint isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </footer>
   );

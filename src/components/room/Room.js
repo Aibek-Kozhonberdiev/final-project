@@ -7,9 +7,6 @@ const Room = ({room}) => {
   const userId = parseInt(localStorage.getItem('userId'))
   const lobby = JSON.parse(localStorage.getItem('lobby'))
 
-
-  
-
   const data = {
     name: room.name,
     status: room.status,
@@ -20,7 +17,7 @@ const Room = ({room}) => {
     e.preventDefault()
     if (!room.members.includes(userId)) {
 
-      data.members.push(userId);
+      data.members = [...data.members, userId]
     }
     const accessToken = localStorage.getItem('accessToken');
     try {
@@ -31,7 +28,8 @@ const Room = ({room}) => {
         },
       });
 
-      console.log('Успешно обновлено:', response.data);
+      const lobby= response.data
+      localStorage.setItem('lobby', JSON.stringify(lobby))
     } catch (error) {
       
       console.error('Ошибка:', error);
@@ -47,7 +45,7 @@ const Room = ({room}) => {
       <div className='rooms__desc'>
         <p className='rooms__name'>Название комнаты: {room.name}</p>
       </div>
-      {room.id !== lobby.id ? <Button text={'Присоединиться'} className={'collection__btn'} onClick={handleJoin}/> : <p className='section__subtitle'>Вы состоите в этой комнате</p>}
+      {room?.id !== lobby?.id ? <Button text={'Присоединиться'} className={'collection__btn'} onClick={handleJoin}/> : <p className='section__subtitle'>Вы состоите в этой комнате</p>}
     </div>
   );
 };

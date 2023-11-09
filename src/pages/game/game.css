@@ -1,6 +1,4 @@
-.game {
-    height: calc(100vh - 70px);
-}
+
 .game__wrapper {
     padding: 70px 0;
     text-align: center;
