@@ -31,7 +31,6 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
   };
-  
 
   const getCurrentTimeInDesiredFormat = () => {
     const now = moment();
@@ -44,8 +43,7 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
     try {
       const adminAccessToken = localStorage.getItem('adminAccessToken');
       const userId = localStorage.getItem('userId');
-  
-      // Создание новой категории
+
       const categoryResponse = await axios(
         'http://aiba23334.pythonanywhere.com/api/categories/',
         {
@@ -59,12 +57,11 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
           },
         }
       );
-  
+
       const categoryId = categoryResponse.data.id;
-  
-      // Создание нового квиза
+
       const dateTime = getCurrentTimeInDesiredFormat();
-  
+
       const formData = new FormData();
       formData.append('update', dateTime);
       formData.append('category', category);
@@ -72,20 +69,22 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
       formData.append('content', description);
       formData.append('user', userId);
       formData.append('cat', categoryId);
-  
-      // Добавьте файл к данным формы
+
       if (file) {
         formData.append('img', file);
-        console.log('файл есть')
       }
-  
-      const response = await axios.post('http://aiba23334.pythonanywhere.com/api/quizzes/', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Указываем правильный тип контента
-          Authorization: `Bearer ${adminAccessToken}`,
-        },
-      });
-  
+
+      const response = await axios.post(
+        'http://aiba23334.pythonanywhere.com/api/quizzes/',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data', // Указываем правильный тип контента
+            Authorization: `Bearer ${adminAccessToken}`,
+          },
+        }
+      );
+
       setQuizData((quizData.quizId = response?.data?.id));
       closeModal();
     } catch (error) {

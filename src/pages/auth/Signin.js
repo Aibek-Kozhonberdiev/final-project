@@ -21,10 +21,9 @@ const Signin = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
   };
   const getConfirmation = async (userId) => {
-    console.log('код отправляется');
+
     const adminAccessToken = localStorage.getItem('adminAccessToken');
     localStorage.setItem('userId', userId);
     try {
@@ -32,14 +31,14 @@ const Signin = () => {
         `http://aiba23334.pythonanywhere.com/api/user-confirmation/${userId}/`
       );
 
-      console.log('код отправлен');
+
     } catch (error) {
       console.error('Ошибка:', error);
     }
   };
   const sendCode = async (e) => {
     e.preventDefault();
-    console.log('юзер ввел код');
+
     const adminAccessToken = localStorage.getItem('adminAccessToken');
     const userId = localStorage.getItem('userId');
     try {
@@ -54,7 +53,6 @@ const Signin = () => {
         }
       );
 
-      console.log('сервер получил код');
       setIsConfirmed(true);
       localStorage.setItem('isConfirmed', true);
       const { username, password } = formData;

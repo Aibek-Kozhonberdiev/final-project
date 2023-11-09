@@ -184,12 +184,7 @@ margin-left: 10px;
 .login__link {
   text-decoration: underline;
 }
-.signin__confirm {
-  
-}
-.notification {
 
-}
 .notification__wrapper {
   display: flex;
   flex-direction: column;

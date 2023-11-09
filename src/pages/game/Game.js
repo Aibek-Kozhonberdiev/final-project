@@ -47,7 +47,6 @@ const Game = () => {
           point: isCorrect, 
         };
         const response = await axios.post(apiUrl, data, { headers });
-        console.log('add-point start');
       } catch (error) {
         console.error('Ошибка:', error);
       }

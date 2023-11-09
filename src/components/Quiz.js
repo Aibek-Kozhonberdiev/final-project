@@ -16,7 +16,7 @@ const Quiz = ({ el }) => {
   const handleAddQustions = () => {
     setQModalIsOpen(!qModalIsOpen);
   };
-  console.log(el);
+
 
   return (
     <div className='quizzes__item'>

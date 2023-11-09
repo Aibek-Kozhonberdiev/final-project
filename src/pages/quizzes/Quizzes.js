@@ -34,7 +34,6 @@ const Quizzes = () => {
       if (response.status === 200) {
         dispatch(addQuizzes(response.data.results));
         localStorage.setItem('quizzes', JSON.stringify(response.data.results));
-        console.log(response.data.results);
       } else {
         console.error('Ошибка при получении данных:', response.status);
       }
@@ -51,7 +50,6 @@ const Quizzes = () => {
   const userId = JSON.parse(localStorage.getItem('userId'));
 
   const myQuizzes = quizzes.filter((quiz) => quiz.user === userId);
-  console.log(myQuizzes);
 
   const handleMyQuizzes = (e) => {
     if (e.target.value === 'мои квизы') {
@@ -63,13 +61,13 @@ const Quizzes = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
-    console.log(searchQuery)
+
   };
   
   const filteredQuizzes = isMyQuizzes
   ? (myQuizzes || []).filter((quiz) => quiz.title && quiz.title.toLowerCase().includes(searchQuery.toLowerCase()))
   : (quizzes || []).filter((quiz) => quiz.title && quiz.title.toLowerCase().includes(searchQuery.toLowerCase()));
-console.log(isMyQuizzes)
+
   return (
     <section className='quizzes section' id='#quizzes'>
       <div className='container'>

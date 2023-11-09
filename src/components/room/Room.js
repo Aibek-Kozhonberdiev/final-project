@@ -35,8 +35,6 @@ const Room = ({room}) => {
       
       console.error('Ошибка:', error);
     }
-
-    console.log(data)
   }
   return (
     <div className='rooms__card'>

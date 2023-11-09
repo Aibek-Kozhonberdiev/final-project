@@ -4,7 +4,7 @@ import './home.css';
 import { useSelector } from 'react-redux';
 import Login from '../auth/Login.js';
 import { NavLink } from 'react-router-dom';
-import AnimatedNumber from '../../components/Numbers.js';
+
 
 const Home = () => {
   const isAuth = useSelector((state) => (state.auth.isAuth));

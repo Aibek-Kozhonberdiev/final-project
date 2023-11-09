@@ -29,7 +29,6 @@ const Lobby = () => {
   //     console.log('WebSocket closed');
   //   };
   
-  //   // Clean up the WebSocket connection when the component unmounts
   //   return () => {
   //     ws.close();
   //   };
@@ -64,7 +63,6 @@ const Lobby = () => {
   
   const quiz = quizzes.find((quiz) => quiz.id === lobby.quizzes);
   const quizName = quiz?.title;
-  console.log(lobby);
   const adminAccessToken = localStorage.getItem('adminAccessToken')
 
   const startGame = async() => {
@@ -85,11 +83,6 @@ const Lobby = () => {
         },
       });
     
-      if (response.status === 200) {
-        console.log(response);
-      } else {
-        console.error('Ошибка при получении данных:', response.status);
-      }
     } catch (error) {
       console.error('Ошибка:', error);
     }

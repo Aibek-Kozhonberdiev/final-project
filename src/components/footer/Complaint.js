@@ -12,7 +12,7 @@ const Complaint = ({isOpen, setIsOpen}) => {
   const handleComplaint = (e) => {
     setComplaint(e.target.value);
   };
-console.log(complaint)
+
     const sendComplaint = async (e) => {
         e.preventDefault();
     

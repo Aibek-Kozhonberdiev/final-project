@@ -30,7 +30,7 @@ const Notification = ({ nextQuestion }) => {
 
   useEffect(() => {
     getPoints();
-    console.log(users)
+
   }, []);
   
 

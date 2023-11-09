@@ -27,7 +27,7 @@ const CreateQuestions = ({ isOpen, id }) => {
   };
 
   const postQuestions = async (e) => {
-    e.preventDefault(); // Предотвращаем стандартное отправление формы
+    e.preventDefault(); 
 
     try {
       const adminAccessToken = localStorage.getItem('adminAccessToken')
@@ -39,7 +39,6 @@ const CreateQuestions = ({ isOpen, id }) => {
       const response = await axios.post(apiUrl, data, { headers });
       console.log(response);
 
-      // Очистить значения инпутов после успешной отправки
       setData({
         text: '',
         choice_a: '',
@@ -60,7 +59,7 @@ const CreateQuestions = ({ isOpen, id }) => {
           <div className='quizzes__input-form'>
             <input
               type='text'
-              value={data.text} // Используем значение из состояния data
+              value={data.text} 
               onChange={handleInputQuestion}
               placeholder='question'
             />
@@ -71,12 +70,12 @@ const CreateQuestions = ({ isOpen, id }) => {
               name='correct_choice'
               value='1'
               onClick={handleTrueAnswer}
-              checked={data.correct_choice === '1'} // Проверяем соответствие значения
+              checked={data.correct_choice === '1'} 
             />
             <input
               type='text'
               name='choice_a'
-              value={data.choice_a} // Используем значение из состояния data
+              value={data.choice_a} 
               onInput={handleInputAnswers}
               placeholder='answer'
               id='1'
@@ -88,12 +87,12 @@ const CreateQuestions = ({ isOpen, id }) => {
               name='correct_choice'
               value='2'
               onClick={handleTrueAnswer}
-              checked={data.correct_choice === '2'} // Проверяем соответствие значения
+              checked={data.correct_choice === '2'} 
             />
             <input
               type='text'
               name='choice_b'
-              value={data.choice_b} // Используем значение из состояния data
+              value={data.choice_b} 
               onInput={handleInputAnswers}
               placeholder='answer'
               id='2'
