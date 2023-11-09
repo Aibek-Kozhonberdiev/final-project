@@ -57,6 +57,18 @@ class ViewSetUser(viewsets.ModelViewSet):
         if key_confirmation.key != key:
             raise TypeError
 
+    @swagger_auto_schema(
+        operation_description='Password changes',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'password': openapi.Schema(type=openapi.FORMAT_PASSWORD),
+                'password2': openapi.Schema(type=openapi.FORMAT_PASSWORD),
+                'key': openapi.Schema(type=openapi.TYPE_STRING),
+                'profile_id': openapi.Schema(type=openapi.TYPE_NUMBER)
+            }
+        )
+    )
     def update(self, request, *args, **kwargs):
         try:
             # Call the key_check method to verify the key
@@ -69,6 +81,28 @@ class ViewSetUser(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+    @swagger_auto_schema(
+        operation_description='Password changes',
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'password': openapi.Schema(type=openapi.FORMAT_PASSWORD),
+                'password2': openapi.Schema(type=openapi.FORMAT_PASSWORD),
+                'key': openapi.Schema(type=openapi.TYPE_STRING),
+                'profile_id': openapi.Schema(type=openapi.TYPE_NUMBER)
+            }
+        )
+    )
+    def partial_update(self, request, *args, **kwargs):
+        try:
+            # Call the key_check method to verify the key
+            self.key_check(request)
+        except TypeError:
+            return Response({'detail': "the key doesn't match"}, status.HTTP_400_BAD_REQUEST)
+
+        response = super().partial_update(request, *args, **kwargs)
+        return response
 
 
 class PointAdd(APIView):
