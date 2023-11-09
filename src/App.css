@@ -100,6 +100,10 @@ button {
   background: var(--btn-color);
   padding: 10px 20px;
 }
+button:hover {
+  scale: 1.3;
+  transition: 0.3s;
+}
 
 a {
   text-decoration: none;
@@ -191,4 +195,10 @@ margin-left: 10px;
 }
 .notification__btn {
   margin-top: 50px;
+}
+
+@media screen and (max-width: 390px) {
+  .container {
+    max-width: 330px;
+  }
 }

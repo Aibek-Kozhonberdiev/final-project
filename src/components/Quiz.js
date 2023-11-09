@@ -29,16 +29,17 @@ const Quiz = ({ el }) => {
           <p>{el.content}</p>
           <p>Категория: {el?.category?.name}</p>
           <p>Кол-во вопросов: {el.question}</p>
-        </div>
-      </div>
-
-      <div className='quizzes__questions'>
+          <div className='quizzes__questions'>
         {el.question_set.map((question, idx) => (
           <div className='quizzes__questions'>
             <p key={idx}>{`${idx + 1}: ${question.text}`}</p>
           </div>
         ))}
       </div>
+        </div>
+      </div>
+
+
       {el.user === userId ? (
         <button
           onClick={() => {

@@ -76,11 +76,12 @@ console.log(isMyQuizzes)
         <h2 className='section__title'>Все квизы </h2>
         <p className='section__subtitle'>Список всех квизов</p>
 
-        <div className='quizzes_filters'>
+        <div className='quizzes__filters'>
           <Input
             className={'quizzes__input'}
             value={searchQuery}
             onChange={handleSearchInputChange}
+            placeholder={'Поиск по названию'}
           />
 
           <select className='quizzes__select' onChange={handleMyQuizzes}>
@@ -88,9 +89,9 @@ console.log(isMyQuizzes)
             <option>мои квизы</option>
           </select>
 
-          <div className='quizzes__btns'>
+
             <Button onClick={openModal} text={'Создать'} />
-          </div>
+
           <QuizModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
         </div>
         <div className='quizzes__list'>

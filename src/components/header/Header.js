@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './header.css'
 import Button from '../Button';
+import HeaderMobile from './HeaderMobile';
 
 
 const Header = () => {
@@ -26,6 +27,7 @@ const Header = () => {
             <Button text={'Играть'} className={'header__btn'}/>
           </NavLink>
         </nav>
+        <HeaderMobile />
 
 
       </div>

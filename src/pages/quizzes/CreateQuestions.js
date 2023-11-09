@@ -44,8 +44,8 @@ const CreateQuestions = ({ isOpen, id }) => {
 
   return (
     isOpen && (
-      <div className='section create-quiz'>
-        <div className='container'>
+<>
+
           <p className='section__subtitle'>Create ur questions!</p>
 
           <form className={'quizzes__modal-form'}>
@@ -89,8 +89,8 @@ const CreateQuestions = ({ isOpen, id }) => {
             </div>
           </form>
           <button onClick={postQuestions}>Создать вопросы</button>
-        </div>
-      </div>
+
+          </>
     )
   );
 };

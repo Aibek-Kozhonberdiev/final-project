@@ -4,6 +4,7 @@ import './home.css';
 import { useSelector } from 'react-redux';
 import Login from '../auth/Login.js';
 import { NavLink } from 'react-router-dom';
+import AnimatedNumber from '../../components/Numbers.js';
 
 const Home = () => {
   const isAuth = useSelector((state) => (state.auth.isAuth));
@@ -26,16 +27,9 @@ const Home = () => {
           </NavLink>
 
           </div>
-          <div className='main__benefits'>
-            <div className='main__benefit'>
-              <h3 className='main__benefit-title'>5</h3>
-              <p className='main__benefit-desc'>Квизов</p>
-            </div>
-            <div className='main__benefit'>
-              <h3 className='main__benefit-title'>5</h3>
-              <p className='main__benefit-desc'>Комнат</p>
-            </div>
-          </div>
+          {/* <div className='main__benefits'>
+
+          </div> */}
         </div>
 
         <div className='main__images'>
