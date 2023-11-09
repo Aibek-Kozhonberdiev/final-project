@@ -1,4 +1,7 @@
+import os
+
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -43,4 +46,8 @@ class KeyConfirmation(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
+        default_image_user = 'static/quiz/img/user.png'
+
+        with open(default_image_user, 'rb') as img_file:
+            content_file = ContentFile(img_file.read(), name=os.path.basename(default_image_user))
+            UserProfile.objects.create(user=instance, avatar=content_file)

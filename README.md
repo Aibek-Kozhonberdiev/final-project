@@ -83,7 +83,6 @@ This project uses environment variables for configuration. Create a `.env` file 
 
 This project includes the following Django apps:
 
-- `django.contrib.admin`
 - `django.contrib.auth`
 - `django.contrib.contenttypes`
 - `django.contrib.sessions`

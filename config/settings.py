@@ -32,7 +32,7 @@ DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
 MY_HOST = os.getenv('MY_HOST')  # From .env file
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', MY_HOST]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', MY_HOST, "*"]
 
 # Application definition
 

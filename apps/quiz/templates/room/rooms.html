@@ -13,8 +13,8 @@ function updatePageContent(data) {
     const responseElement = document.getElementById("response");
     responseElement.textContent = JSON.stringify(data, undefined, 2);
 }
-
-let url = `ws://${window.location.host}/ws/socket-server/`
+let url = `wss://${window.location.host}/ws/socket-server/`
+<!--let url = `wss://aiba23334.pythonanywhere.com/ws/socket-server/`-->
 const ws = new WebSocket(url)
 
 ws.onmessage = function (e) {
