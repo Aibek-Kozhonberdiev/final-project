@@ -11,5 +11,5 @@ router.register(r'rooms', views.ViewSetRoom)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('rooms_online', views.rooms, name='rooms'),
+    path('test/', views.rooms, name='rooms'),
 ]

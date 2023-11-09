@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.static import serve
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
@@ -24,9 +23,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .swagger import schema_view
 
 urlpatterns = [
-    # Admin
-    path('admin/', admin.site.urls),
-
     # Api
     path('api/', include('apps.user.urls')),
     path('api/', include('apps.quiz.urls')),
