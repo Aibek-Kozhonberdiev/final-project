@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include, re_path
 from django.views.static import serve
@@ -23,6 +24,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .swagger import schema_view
 
 urlpatterns = [
+    # Admin
+    path('admin/', admin.site.urls),
+
     # Api
     path('api/', include('apps.user.urls')),
     path('api/', include('apps.quiz.urls')),

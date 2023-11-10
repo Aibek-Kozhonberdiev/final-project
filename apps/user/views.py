@@ -108,10 +108,6 @@ class ViewSetUser(viewsets.ModelViewSet):
 class PointAdd(APIView):
     permission_classes = [permissions.IsAdminUser]
 
-    def get_object(self, pk):
-        profile = get_object_or_404(UserProfile, pk=pk)
-        return profile
-
     def change_point(self, profile, point):
         """
         Change the point value of a given Profile object, ensuring it stays within a specific range.
@@ -140,7 +136,7 @@ class PointAdd(APIView):
         Handle a POST request to update a Profile's point value.
         """
         point = request.data.get('point')
-        profile = self.get_object(pk)
+        profile = get_object_or_404(UserProfile, pk=pk)
 
         try:
             self.change_point(profile, point)

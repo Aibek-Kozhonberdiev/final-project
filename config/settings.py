@@ -32,11 +32,12 @@ DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
 MY_HOST = os.getenv('MY_HOST')  # From .env file
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', MY_HOST, "*"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', MY_HOST]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_yasg',
     'rest_framework_simplejwt',
-    'djongo',
 
     # App
     'apps.user.apps.UserConfig',
@@ -104,10 +104,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': os.getenv('NAME_MONGO'),  # name database MongoDp from .env
-        'HOST': os.getenv('HOST_MONGO'),  # default host localhost
-        'PORT': os.getenv('PORT_MONGO'),  # default port 27017
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('NAME_MYSQL'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 

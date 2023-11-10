@@ -24,6 +24,6 @@ class ComplaintMessage(APIView):
     def post(self, request, pk):
         text = request.data.get('text')
         user = self.get_object(pk)
-        message_text = f"Жалоба на пользователя: {user.username}\n{text}"
+        message_text = f"Жалоба пользователя: {user.username}\n{text}"
 
         return send_message(message_text)

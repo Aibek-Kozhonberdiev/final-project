@@ -40,10 +40,12 @@ EMAIL_PORT = 587 # Default port
 EMAIL_HOST_USER =  # Your e-mail address
 EMAIL_HOST_PASSWORD = '' # Confirmation key
 
-# MongoDp 
-NAME_MONGO = '' # Think there is no need to explain
-HOST_MONGO = ''
-PORT_MONGO = ''
+# MySql 
+NAME = '' # Think there is no need to explain
+NAME_MYSQL = ''
+PASSWORD = ''
+HOST = ''
+PORT = ''
 ```
 
 ## Docker
@@ -82,7 +84,7 @@ This project uses environment variables for configuration. Create a `.env` file 
 ## Installed Apps
 
 This project includes the following Django apps:
-
+- `django.contrib.admin`
 - `django.contrib.auth`
 - `django.contrib.contenttypes`
 - `django.contrib.sessions`
@@ -94,7 +96,6 @@ This project includes the following Django apps:
   - `corsheaders`
   - `drf_yasg`
   - `rest_framework_simplejwt`
-  - `djongo`
 - Custom apps specific to the project:
   - `apps.user.apps.UserConfig`
   - `apps.quiz.apps.QuizConfig`
@@ -102,7 +103,7 @@ This project includes the following Django apps:
 
 ## Database Configuration
 
-This project is originally written in SQLite. But it's better to use MongoDB, you can set your database settings in the `.env` file
+This project is originally written in SQLite. But it's better to use MySql, you can set your database settings in the `.env` file
 
 ## Middleware
 
