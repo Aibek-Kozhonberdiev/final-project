@@ -51,7 +51,7 @@ class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='question_set')
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = 'Questions'
 
     def __str__(self):
         return self.quiz.title
