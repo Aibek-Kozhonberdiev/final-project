@@ -106,7 +106,7 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
                 type='text'
                 name='title'
                 onChange={handleTitle}
-                placeholder='Title'
+                placeholder='название'
               />
             </div>
             <div className='quizzes__input-form'>
@@ -114,20 +114,20 @@ const QuizModal = ({ modalIsOpen, closeModal }) => {
                 type='text'
                 name='category'
                 onChange={handleCategory}
-                placeholder='category'
+                placeholder='категория'
               />
             </div>
             <div className='quizzes__input-form'>
               <textarea
                 name='description'
                 onChange={handleDescription}
-                placeholder='Description'
+                placeholder='описание'
               />
             </div>
             <div className='quizzes__input-form'>
               <input type='file' accept='image/*' onChange={handleFileChange} />
             </div>
-            <button onClick={handleCreateQuiz}>Создать</button>
+            <button className='btn' onClick={handleCreateQuiz}>Создать</button>
           </form>
         </div>
       </Modal>

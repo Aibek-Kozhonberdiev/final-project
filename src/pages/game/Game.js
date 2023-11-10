@@ -80,7 +80,7 @@ const Game = () => {
           ) : (
             <NavLink to='/game' className='header__link'>
               <Button
-                text='next question'
+                text='следующий'
                 className={'notification__btn'}
                 onClick={nextQuestion}
               />

@@ -4,7 +4,7 @@ import './home.css';
 import { useSelector } from 'react-redux';
 import Login from '../auth/Login.js';
 import { NavLink } from 'react-router-dom';
-
+import Form from '../../components/Complaint.js';
 
 const Home = () => {
   const isAuth = useSelector((state) => (state.auth.isAuth));
@@ -19,7 +19,7 @@ const Home = () => {
             Создавай квиз и играй вместе с друзьями!
           </h1>
           <p className='main__subtitle'>
-            Присоединяйся к игре по коду и выбирай квиз.
+            Придумай вопросы и присоединяйся к комнате
           </p>
           <div className='main__buttons'>
           <NavLink to='/lobby' className='header__link'>
@@ -27,9 +27,6 @@ const Home = () => {
           </NavLink>
 
           </div>
-          {/* <div className='main__benefits'>
-
-          </div> */}
         </div>
 
         <div className='main__images'>
@@ -85,6 +82,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <Form />
+
     </main>
       </div>
     ) : <Login /> 

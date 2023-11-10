@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const AddRoom = ({ isOpen, setIsOpen }) => {
   const quizzes = JSON.parse(localStorage.getItem('quizzes'))
-  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0].id);
+  const [selectedQuiz, setSelectedQuiz] = useState(quizzes[0]?.id);
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
 
@@ -77,7 +77,7 @@ const AddRoom = ({ isOpen, setIsOpen }) => {
               ))}
             </select>
           </form>
-          <button onClick={postRoom}>Создать</button>
+          <button className='btn' onClick={postRoom}>Создать</button>
         </div>
       </Modal>
     )

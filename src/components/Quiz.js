@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../pages/quizzes/quizzes.css';
-import Button from './Button';
+
 import { NavLink } from 'react-router-dom';
 import CreateQuestions from '../pages/quizzes/CreateQuestions';
 
@@ -41,7 +41,7 @@ const Quiz = ({ el }) => {
 
 
       {el.user === userId ? (
-        <button
+        <button className='btn'
           onClick={() => {
             handleAddQustions();
           }}>

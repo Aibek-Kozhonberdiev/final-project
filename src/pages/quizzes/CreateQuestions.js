@@ -61,7 +61,7 @@ const CreateQuestions = ({ isOpen, id }) => {
               type='text'
               value={data.text} 
               onChange={handleInputQuestion}
-              placeholder='question'
+              placeholder='введите вопрос'
             />
           </div>
           <div className='quizzes__input-form quizzes__input-question'>
@@ -77,7 +77,7 @@ const CreateQuestions = ({ isOpen, id }) => {
               name='choice_a'
               value={data.choice_a} 
               onInput={handleInputAnswers}
-              placeholder='answer'
+              placeholder='введите ответ'
               id='1'
             />
           </div>
@@ -94,11 +94,11 @@ const CreateQuestions = ({ isOpen, id }) => {
               name='choice_b'
               value={data.choice_b} 
               onInput={handleInputAnswers}
-              placeholder='answer'
+              placeholder='введите ответ'
               id='2'
             />
           </div>
-          <button type="submit">Создать вопросы</button>
+          <button className='btn' type="submit">Создать вопросы</button>
         </form>
       </>
     )
