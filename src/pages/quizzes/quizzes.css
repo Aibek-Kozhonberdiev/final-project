@@ -86,6 +86,12 @@ margin-left: 10px;
 .quizzes__input-question{
     width: 50%;
 }
+.quizzes__content {
+    display: flex;
+    align-items:center;
+    width: 100%;
+    gap: 20%;
+}
 .quizzes__img {
     width: 40%;
     height: 300px;
@@ -97,13 +103,10 @@ margin-left: 10px;
     height: 100%;
     object-fit: cover;
 }
-.quizzes__content {
-    display: flex;
-    align-items:center;
-    width: 100%;
-    gap: 20%;
-}
 
+.quizzes__desc {
+    max-width: 50%;
+}
 @media screen and (max-width: 390px) {
     .quizzes__filters {
         flex-wrap: wrap;
@@ -124,5 +127,6 @@ margin-left: 10px;
     }
     .quizzes__desc {
         text-align: center;
+        max-width: 100%;
     }
 }

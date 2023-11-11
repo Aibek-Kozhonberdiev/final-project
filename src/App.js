@@ -16,6 +16,7 @@ import CreateQuestions from './pages/quizzes/CreateQuestions';
 import Notification from './components/Notification.js';
 import { login } from './actions/authActions.js';
 import Footer from './components/footer/Footer.js';
+import Users from './pages/users/Users.js';
 
 function App() {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ function App() {
             <Route path='/game' element={<Game />} />
             <Route path='/create-questions' element={<CreateQuestions />} />
             <Route path='/notification' element={<Notification />} />
+            <Route path='/users' element={<Users />} />
 
           </Routes>
           <Footer/>

@@ -23,6 +23,9 @@ const Footer = () => {
           <NavLink to='/rooms' className='header__link'>
             Комнаты
           </NavLink>
+          <NavLink to='/users' className='header__link'>
+            Юзеры
+          </NavLink>
         </nav>
 
       </div>
