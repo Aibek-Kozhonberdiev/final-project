@@ -18,7 +18,7 @@ python -m venv venv
 ```bash
 pip install -r requirements.txt
 ```
-4. Create a `.env` file in the project's root directory and set the required environment variables, as mentioned below.
+4. Create an `.env` file in the project's root directory and set the required environment variables, as mentioned below.
 ```bash
 vim .env
 ```
