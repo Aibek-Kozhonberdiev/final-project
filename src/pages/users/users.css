@@ -5,7 +5,6 @@
 }.users__user {
     display: flex;
     flex-direction: column;
-
     background-color: var(--btn-color-gray);
     padding: 10px;
     border-radius: 15px;
@@ -13,7 +12,7 @@
 }
 .users__img {
     width: 300px;
-    height: 400px;
+    height: 300px;
     overflow: hidden;
     border-radius: 15px;
 

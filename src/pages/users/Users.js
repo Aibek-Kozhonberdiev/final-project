@@ -41,7 +41,8 @@ const Users = () => {
         <p className="users__name">Логин: {user.username}</p>
         <p className="users__id">ID: {user.userprofile.id}</p>
         <p className="users__id">Игр сыграно: {user.userprofile.number_of_completed_games}</p>
-        <p className="users__id">{user.userprofile.phone}</p>
+
+        <p className="users__id">Баллы:{user.userprofile.point}</p>
     </div>
 )}
 </div>
