@@ -29,7 +29,7 @@ const Game = () => {
     setIsCorrect(chosenAnswer === questionSets[currentQuestionIndex]?.correct_choice ? 10 : -3);
   };
   
-
+// console.log(questionSets[currentQuestionIndex].img ?)
   const nextQuestion = async () => {
 
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -96,6 +96,10 @@ const Game = () => {
         <p className='section__subtitle'>Выберите правильный ответ</p>
         {questionSets.length ? (
           <div className='game__wrapper'>
+           {questionSets[currentQuestionIndex].img ?
+           <div className="game__img">
+              <img src={questionSets[currentQuestionIndex].img} alt="" />
+            </div> : null }
             <p className='game__question'>{questionSets[currentQuestionIndex]?.text}</p>
             <div className='game__answers'>
               {['choice_a', 'choice_b', 'choice_c', 'choice_d'].map((choice, index) => {
