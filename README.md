@@ -8,7 +8,7 @@ To get started with this project, follow these steps:
 
 1. Clone the project repository:
 ```bash 
-git clone https://github.com/Aibek-Kozonberdiev/final-project.git
+git clone https://github.com/Aibek-Kozhonberdiev/final-project.git
 ```
 2. Create a Python virtual environment and activate it.
 ```bash
